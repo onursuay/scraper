@@ -1,0 +1,846 @@
+{
+  "name": "Business Scanner Auto + Email Sender",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 21
+            }
+          ]
+        }
+      },
+      "id": "8fab2c47-00b6-41f1-a3d9-c81e3e1ba802",
+      "name": "Daily 0900",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        1248,
+        6960
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 18 SEKTÖR - Her gün sırayla işlenecek\nconst sektorler = [\n  {\n    gun: 1,\n    baslik: \"Sağlık Ve Medikal\",\n    anahtarKelimeler: [\"Hastane\", \"Özel Hastane\", \"Tıp Merkezi\", \"Poliklinik\", \"Saç Ekimi Merkezi\", \"Estetik Cerrahi\", \"Diş Kliniği\", \"Diş Hekimi\", \"Ortodonti\", \"İmplant Merkezi\", \"Göz Hastalıkları\", \"Fizik Tedavi\", \"Psikolog\", \"Terapi Merkezi\", \"Diyetisyen\", \"Veteriner Kliniği\"]\n  },\n  {\n    gun: 2,\n    baslik: \"Güzellik, Kişisel Bakım, Wellness\",\n    anahtarKelimeler: [\"Kuaför\", \"Berber\", \"Güzellik Merkezi\", \"Cilt Bakımı\", \"Lazer Epilasyon\", \"SPA Merkezi\", \"Masaj Salonu\", \"Nail Studio\", \"Manikür Pedikür\", \"Kalıcı Makyaj\", \"Solaryum\"]\n  },\n  {\n    gun: 3,\n    baslik: \"Yeme-İçme\",\n    anahtarKelimeler: [\"Restoran\", \"Kafe\", \"Pastane\", \"Fırın\", \"Fast Food\", \"Dönerci\", \"Kebapçı\", \"Pideci\", \"Burgerci\", \"Pizza\", \"Balık Restoranı\", \"Kahvaltı Mekanı\", \"Tatlıcı\", \"Catering\"]\n  },\n  {\n    gun: 4,\n    baslik: \"Konaklama Ve Turizm\",\n    anahtarKelimeler: [\"Otel\", \"Butik Otel\", \"Pansiyon\", \"Apart Otel\", \"Tatil Köyü\", \"Seyahat Acentası\", \"Tur Operatörü\", \"Transfer Firması\"]\n  },\n  {\n    gun: 5,\n    baslik: \"Perakende Ve Mağazacılık\",\n    anahtarKelimeler: [\"Giyim Mağazası\", \"Ayakkabı Mağazası\", \"Kuyumcu\", \"Optik\", \"Telefon Bayii\", \"Bilgisayar Mağazası\", \"Mobilya Mağazası\", \"Ev Tekstili\", \"Yapı Market\", \"Kitapçı\", \"Pet Shop\", \"Çiçekçi\"]\n  },\n  {\n    gun: 6,\n    baslik: \"Otomotiv\",\n    anahtarKelimeler: [\"Oto Servis\", \"Oto Elektrik\", \"Kaporta Boya\", \"Lastikçi\", \"Oto Yıkama\", \"Oto Kiralama\", \"Rent A Car\", \"Galeri\", \"Yedek Parça\", \"Motosiklet Servisi\"]\n  },\n  {\n    gun: 7,\n    baslik: \"İnşaat, Emlak, Mimarlık\",\n    anahtarKelimeler: [\"Müteahhit\", \"İnşaat Firması\", \"Emlak Ofisi\", \"Mimarlık Ofisi\", \"İç Mimarlık\", \"Dekorasyon\", \"Peyzaj\", \"Asansör Firması\"]\n  },\n  {\n    gun: 8,\n    baslik: \"Ev Ve İş Yeri Hizmetleri\",\n    anahtarKelimeler: [\"Temizlik Şirketi\", \"Halı Yıkama\", \"Koltuk Yıkama\", \"Elektrikçi\", \"Tesisatçı\", \"Kombi Servisi\", \"Klima Servisi\", \"Nakliyat\", \"Evden Eve Taşıma\"]\n  },\n  {\n    gun: 9,\n    baslik: \"Eğitim\",\n    anahtarKelimeler: [\"Anaokulu\", \"Kreş\", \"Özel Okul\", \"Kolej\", \"Etüt Merkezi\", \"Dil Kursu\", \"Sürücü Kursu\", \"Müzik Kursu\", \"Dans Kursu\"]\n  },\n  {\n    gun: 10,\n    baslik: \"Finans, Sigorta, Hukuk\",\n    anahtarKelimeler: [\"Muhasebe Ofisi\", \"Mali Müşavir\", \"Sigorta Acentası\", \"Hukuk Bürosu\", \"Avukat\", \"Patent Marka Tescil\"]\n  },\n  {\n    gun: 11,\n    baslik: \"Teknoloji Ve Dijital\",\n    anahtarKelimeler: [\"Dijital Pazarlama Ajansı\", \"SEO Ajansı\", \"Sosyal Medya Ajansı\", \"Yazılım Şirketi\", \"Web Tasarım\", \"Mobil Uygulama\", \"IT Destek\"]\n  },\n  {\n    gun: 12,\n    baslik: \"Medya, Organizasyon, Spor\",\n    anahtarKelimeler: [\"Fotoğraf Stüdyosu\", \"Video Prodüksiyon\", \"Düğün Organizasyon\", \"Etkinlik Organizasyon\", \"Spor Salonu\", \"Pilates\", \"Yoga\", \"Yüzme Kursu\"]\n  },\n  {\n    gun: 13,\n    baslik: \"Üretim Ve Sanayi\",\n    anahtarKelimeler: [\"Gıda Üretimi\", \"Tekstil Üretimi\", \"Mobilya Üretimi\", \"Metal İşleme\", \"Plastik Enjeksiyon\", \"Ambalaj Üretimi\", \"Matbaa\"]\n  },\n  {\n    gun: 14,\n    baslik: \"Tarım Ve Hayvancılık\",\n    anahtarKelimeler: [\"Sera\", \"Tarım Ürünleri\", \"Zeytin Zeytinyağı\", \"Arıcılık\", \"Hayvancılık\", \"Yem Bayii\", \"Tarım Makineleri\"]\n  },\n  {\n    gun: 15,\n    baslik: \"Enerji Ve Çevre\",\n    anahtarKelimeler: [\"Güneş Enerjisi\", \"Solar Panel\", \"Enerji Verimliliği\", \"Jeneratör\", \"Geri Dönüşüm\", \"Su Arıtma\"]\n  },\n  {\n    gun: 16,\n    baslik: \"Lojistik\",\n    anahtarKelimeler: [\"Nakliye\", \"Taşımacılık\", \"Depo\", \"Gümrük Müşavirliği\", \"Kargo\", \"Kurye\"]\n  },\n  {\n    gun: 17,\n    baslik: \"İnsan Kaynakları Ve Hizmet\",\n    anahtarKelimeler: [\"Özel Güvenlik\", \"Temizlik Personeli\", \"İnsan Kaynakları\", \"Bordrolama\", \"OSGB\"]\n  },\n  {\n    gun: 18,\n    baslik: \"Kamu Ve STK\",\n    anahtarKelimeler: [\"Dernek\", \"Vakıf\", \"Oda\", \"Birlik\"]\n  }\n];\n\n// Başlangıç tarihi (bu tarihten itibaren gün sayısı hesaplanacak)\nconst startDate = new Date('2025-01-01');\nconst today = new Date();\n\n// Gün farkını hesapla\nconst diffTime = Math.abs(today - startDate);\nconst diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));\n\n// 18'e böl ve kalanı al (0-17 arası)\nconst sektorIndex = diffDays % 18;\nconst bugunSektoru = sektorler[sektorIndex];\n\n// Anahtar kelimeleri birleştir (ilk 3 kelimeyi kullan)\nconst lokasyon = 'Ankara';\nconst anahtarKelimeler = bugunSektoru.anahtarKelimeler.slice(0, 3).join(' OR ');\nconst searchQuery = `${anahtarKelimeler} ${lokasyon} iletişim email`;\n\nreturn [{\n  json: {\n    Sektor: bugunSektoru.baslik,\n    SektorIndex: sektorIndex + 1,\n    Lokasyon: lokasyon,\n    AnahtarKelimeler: bugunSektoru.anahtarKelimeler.join(', '),\n    SearchQuery: searchQuery,\n    Tarih: today.toISOString().split('T')[0]\n  }\n}];"
+      },
+      "id": "cb428532-caaa-4ec2-8677-918cb4567850",
+      "name": "Get Today Sector",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1456,
+        6960
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "11vSrTS4d7Z4x_6z-v5WOFahlkklqPKBvYlB40oeANgM",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 987142293,
+          "mode": "list",
+          "cachedResultName": "Scanner",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11vSrTS4d7Z4x_6z-v5WOFahlkklqPKBvYlB40oeANgM/edit#gid=987142293"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "E-mail",
+              "lookupValue": "=={{ $json.Email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        3616,
+        6960
+      ],
+      "id": "ba4e9512-3aed-4502-b4cb-9357c709abb8",
+      "name": "Check Duplicate",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "nxwxel5DBqk1teny",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "11vSrTS4d7Z4x_6z-v5WOFahlkklqPKBvYlB40oeANgM",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Sektor Log",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Tarih": "={{ $('Get Today Sector').first().json.Tarih }}",
+            "Sektor": "={{ $('Get Today Sector').first().json.Sektor }}",
+            "Lokasyon": "={{ $('Get Today Sector').first().json.Lokasyon }}",
+            "Islenen Kayit": "={{ $('Format Output1').item.json['Company Name'] }}",
+            "Gonderilen Email": "={{ $('Format Output1').item.json['Email'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Tarih",
+              "displayName": "Tarih",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Sektor",
+              "displayName": "Sektor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Lokasyon",
+              "displayName": "Lokasyon",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Islenen Kayit",
+              "displayName": "Islenen Kayit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Gonderilen Email",
+              "displayName": "Gonderilen Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        4592,
+        6736
+      ],
+      "id": "9286c2cf-d18b-4ff2-8c4f-4f15182823e3",
+      "name": "Sektor Log",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "nxwxel5DBqk1teny",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ========== REGEX PATTERNS ==========\nconst emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,}/gi;\nconst phoneRegex = /(?:\\+90|0)?\\s*\\(?\\d{3}\\)?[\\s.-]*\\d{3}[\\s.-]*\\d{2}[\\s.-]*\\d{2}/g;\n\n// ========== GET DATA ==========\nconst html = items[0].json.data || items[0].json.body || '';\nconst url = $('Loop').item.json.url || '';\nconst lokasyon = $('Loop').item.json.lokasyon || '';\nconst sektor = $('Loop').item.json.sektor || '';\n\n// ========== SUBDOMAIN LİSTESİ ==========\nconst subdomains = ['www', 'ankara', 'istanbul', 'izmir', 'antalya', 'bursa', 'adana', 'konya', 'gaziantep', 'mersin', 'kayseri', 'eskisehir', 'samsun', 'denizli', 'trabzon', 'erzurum', 'diyarbakir', 'malatya', 'van', 'batman', 'elazig', 'manisa', 'balikesir', 'mugla', 'aydin', 'hatay', 'ordu', 'rize', 'giresun', 'bolu', 'duzce', 'edirne', 'tekirdag', 'kirklareli', 'canakkale', 'yalova', 'kocaeli', 'sakarya', 'bilecik', 'kutahya', 'afyon', 'usak', 'isparta', 'burdur', 'aksaray', 'nevsehir', 'nigde', 'kirsehir', 'karaman', 'cankaya', 'kecioren', 'mamak', 'etimesgut', 'sincan', 'polatli', 'eryaman', 'batikent', 'cayyolu', 'kadikoy', 'besiktas', 'sisli', 'bakirkoy', 'fatih', 'uskudar', 'umraniye', 'maltepe', 'kartal', 'pendik', 'tuzla', 'bornova', 'karsiyaka', 'konak', 'buca', 'tr', 'com', 'org', 'net', 'edu', 'gov', 'k12', 'meb', 'info', 'biz'];\n\n// ========== BİLİNEN DOMAIN'LER ==========\nconst knownDomains = {\n  'nana': 'Nana', 'abc': 'ABC',\n  'ozgelisimokullari': 'Özgelişim Okulları',\n  'marinayaseminanaokulu': 'Marina Yasemin Anaokulu',\n  'tadpreschoolcekmekoy': 'TAD Preschool Çekmeköy',\n  'akademicocukanaokulu': 'Akademi Çocuk Anaokulu',\n  'parlaanaokulu': 'Parla Anaokulu',\n  'okutgenaanaokulu': 'Okutgen Anaokulu',\n  'dogakentkres': 'Doğakent Kreş',\n  'yuvailkadim': 'Yuva İlkadım',\n  'maviyesilcizgi': 'Mavi Yeşil Çizgi',\n  'noraanaokulu': 'Nora Anaokulu',\n  'mimozaanaokulu': 'Mimoza Anaokulu',\n  'bilgiliyuvamanaokulu': 'Bilgili Yuvam Anaokulu',\n  'pembevemavi': 'Pembe ve Mavi',\n  'minikanaokulu': 'Minik Anaokulu',\n  'cicekleranaokulu': 'Çiçekler Anaokulu',\n  'pamuksekeri': 'Pamuk Şekeri',\n  'ozelmavidusleranaokulu': 'Özel Mavi Düşler Anaokulu',\n  'naturaanaokulu': 'Natura Anaokulu',\n  'sevgimanaokulu': 'Sevgim Anaokulu',\n  'toramananaokulu': 'Toraman Anaokulu',\n  'uzaycocuklarianaokulu': 'Uzay Çocukları Anaokulu',\n  'gulverenanaokulu': 'Gülveren Anaokulu',\n  'tadpreschool': 'TAD Preschool',\n  'tadpreschoolbatikent': 'TAD Preschool Batıkent',\n  'secilmisanaokulu': 'Seçilmiş Anaokulu',\n  'secilmiskids': 'Seçilmiş Kids',\n  'pianaokulu': 'Pia Anaokulu',\n  'demanaokulu': 'Dem Anaokulu',\n  'kumanaokulu': 'Kum Anaokulu',\n  'erteanaokulu': 'Erte Anaokulu',\n  'ozelilkkalem': 'Özel İlk Kalem',\n  'ninnicicukvevi': 'Ninni Çocuk Evi',\n  'moderncocukanaokulu': 'Modern Çocuk Anaokulu',\n};\n\n// ========== KELİME SÖZLÜĞÜ ==========\nconst wordMap = {\n  'okullari': 'Okulları', 'anaokulları': 'Anaokulları', 'anaokullari': 'Anaokulları',\n  'cocuklari': 'Çocukları', 'cocuklar': 'Çocuklar', 'minikler': 'Minikler',\n  'cicekler': 'Çiçekler', 'dusler': 'Düşler', 'yildizlar': 'Yıldızlar',\n  'preschool': 'Preschool', 'kindergarten': 'Kindergarten', 'montessori': 'Montessori',\n  'academy': 'Academy', 'center': 'Center', 'world': 'World', 'kids': 'Kids',\n  'cekmekoy': 'Çekmeköy', 'kadikoy': 'Kadıköy', 'bakirkoy': 'Bakırköy',\n  'uskudar': 'Üsküdar', 'besiktas': 'Beşiktaş', 'sisli': 'Şişli',\n  'umraniye': 'Ümraniye', 'maltepe': 'Maltepe', 'kartal': 'Kartal',\n  'pendik': 'Pendik', 'tuzla': 'Tuzla', 'atasehir': 'Ataşehir',\n  'sancaktepe': 'Sancaktepe', 'sultanbeyli': 'Sultanbeyli',\n  'esenyurt': 'Esenyurt', 'beylikduzu': 'Beylikdüzü', 'avcilar': 'Avcılar',\n  'akademi': 'Akademi', 'gelisim': 'Gelişim', 'egitim': 'Eğitim',\n  'yasemin': 'Yasemin', 'marina': 'Marina', 'parla': 'Parla',\n  'okutgen': 'Okutgen', 'ninni': 'Ninni', 'modern': 'Modern',\n  'anaokulu': 'Anaokulu', 'okulu': 'Okulu', 'okul': 'Okul', 'kres': 'Kreş',\n  'ilkadim': 'İlkadım', 'yuva': 'Yuva', 'yuvam': 'Yuvam', 'evi': 'Evi',\n  'cocuk': 'Çocuk', 'bebek': 'Bebek', 'minik': 'Minik', 'cicek': 'Çiçek', 'gul': 'Gül',\n  'mavi': 'Mavi', 'yesil': 'Yeşil', 'beyaz': 'Beyaz', 'pembe': 'Pembe', 'sari': 'Sarı',\n  'kirmizi': 'Kırmızı', 'mor': 'Mor', 'turuncu': 'Turuncu',\n  'cizgi': 'Çizgi', 'bilgili': 'Bilgili', 'bilgi': 'Bilgi',\n  'dunya': 'Dünya', 'uzay': 'Uzay', 'yildiz': 'Yıldız', 'gunes': 'Güneş',\n  'doga': 'Doğa', 'dogal': 'Doğal', 'kent': 'Kent',\n  'mutlu': 'Mutlu', 'sevgi': 'Sevgi', 'sevgim': 'Sevgim', 'nese': 'Neşe', 'neseli': 'Neşeli',\n  'umut': 'Umut', 'adim': 'Adım', 'renk': 'Renk', 'renkli': 'Renkli',\n  'ozel': 'Özel', 'ozge': 'Özge', 'yeni': 'Yeni', 'ilk': 'İlk', 'mini': 'Mini',\n  'pamuk': 'Pamuk', 'seker': 'Şeker', 'sekeri': 'Şekeri',\n  'natura': 'Natura', 'natur': 'Natur', 'eko': 'Eko',\n  'gulveren': 'Gülveren', 'toraman': 'Toraman',\n  'nora': 'Nora', 'lara': 'Lara', 'ela': 'Ela', 'ada': 'Ada', 'eda': 'Eda',\n  'ceren': 'Ceren', 'sema': 'Sema', 'mimoza': 'Mimoza', 'nana': 'Nana',\n  'pia': 'Pia', 'dem': 'Dem', 'kum': 'Kum', 'erte': 'Erte',\n  'merkez': 'Merkez', 'merkezi': 'Merkezi',\n  'tad': 'TAD', 'abc': 'ABC', 'aep': 'AEP',\n  've': 've',\n};\n\n// ========== URL'DEN DOMAIN ÇIKAR ==========\nfunction getDomainName(fullUrl) {\n  if (!fullUrl) return '';\n  const match = fullUrl.match(/https?:\\/\\/([^\\/]+)/i);\n  if (!match || !match[1]) return '';\n  const parts = match[1].toLowerCase().split('.');\n  for (const part of parts) {\n    if (part.length > 3 && !subdomains.includes(part)) {\n      return part;\n    }\n  }\n  for (const part of parts) {\n    if (part.length > 2 && part !== 'www') {\n      return part;\n    }\n  }\n  return '';\n}\n\n// ========== COMPANY NAME ÇIKAR ==========\nfunction extractCompanyName(domain) {\n  if (!domain || domain.length < 2) return 'Bilinmeyen';\n  domain = domain.toLowerCase().replace(/-/g, '');\n  if (knownDomains[domain]) return knownDomains[domain];\n  const sortedWords = Object.keys(wordMap).sort((a, b) => b.length - a.length);\n  let remaining = domain;\n  let parts = [];\n  while (remaining.length > 0) {\n    let found = false;\n    for (const word of sortedWords) {\n      if (remaining.startsWith(word)) {\n        parts.push(wordMap[word]);\n        remaining = remaining.slice(word.length);\n        found = true;\n        break;\n      }\n    }\n    if (!found) {\n      const char = remaining.charAt(0);\n      remaining = remaining.slice(1);\n      if (parts.length > 0 && parts[parts.length - 1].length <= 3) {\n        parts[parts.length - 1] += char;\n      } else {\n        parts.push(char);\n      }\n    }\n  }\n  return parts.map(p => {\n    if (p.toLowerCase() === 've') return 've';\n    if (p.length === 1) return p.toUpperCase();\n    return p.charAt(0).toUpperCase() + p.slice(1);\n  }).join(' ').trim() || 'Bilinmeyen';\n}\n\n// ========== EXTRACT EMAIL ==========\nfunction extractEmail(html) {\n  const matches = html.match(emailRegex) || [];\n  const validEmails = matches.filter(email => {\n    const lower = email.toLowerCase();\n    return !lower.match(/\\.(png|jpg|jpeg|gif|css|js|svg)$/) && !lower.includes('wixpress') && !lower.includes('sentry') && !lower.includes('example');\n  });\n  return [...new Set(validEmails)][0] || null;\n}\n\n// ========== EXTRACT PHONE ==========\nfunction extractPhone(html) {\n  const matches = html.match(phoneRegex) || [];\n  if (matches.length === 0) return null;\n  let phone = matches[0].replace(/[^0-9+]/g, '');\n  if (!phone.startsWith('+90') && !phone.startsWith('0') && phone.length === 10) phone = '0' + phone;\n  if (phone.startsWith('0') && phone.length === 11) {\n    return phone.slice(0,4) + ' ' + phone.slice(4,7) + ' ' + phone.slice(7,9) + ' ' + phone.slice(9,11);\n  }\n  return phone;\n}\n\n// ========== MAIN ==========\nconst email = extractEmail(html);\nconst phone = extractPhone(html);\nconst domainName = getDomainName(url);\nlet companyName = extractCompanyName(domainName);\n\nif (companyName === 'Bilinmeyen' && email && email.includes('@')) {\n  const emailDomain = email.split('@')[1];\n  if (!emailDomain.includes('gmail') && !emailDomain.includes('hotmail') && !emailDomain.includes('yahoo')) {\n    companyName = extractCompanyName(emailDomain.split('.')[0]);\n  }\n}\n\nreturn [{\n  json: {\n    'Company Name': companyName,\n    'Lokasyon': lokasyon,\n    'Category': sektor,\n    'Phone': phone,\n    'Email': email,\n    'Website': url\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3264,
+        6960
+      ],
+      "id": "3ba5c0d1-c061-45a6-aac6-1fd627c7fcba",
+      "name": "Extract Info1",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const prevData = items[0].json;\n\nreturn [{\n  json: {\n    'Company Name': prevData['Company Name'],\n    'Lokasyon': prevData['Lokasyon'],\n    'Category': prevData['Category'],\n    'Phone': prevData['Phone'] || '',\n    'Email': prevData['Email'],\n    'Website': prevData['Website']\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3968,
+        6896
+      ],
+      "id": "112cd689-bdd1-4157-b171-e8f86430698c",
+      "name": "Format Output1"
+    },
+    {
+      "parameters": {
+        "amount": "={{ Math.floor(Math.random() * 3 + 2) }}"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4592,
+        6944
+      ],
+      "id": "193f981d-81e2-42c9-acd6-1cc7822907d9",
+      "name": "Random Wait1",
+      "webhookId": "random-wait-1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/apify~google-search-scraper/runs?token=APIFY_TOKEN_BURAYA_GIRILECEK",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"queries\": \"{{ $json.SearchQuery }}\",\n  \"maxPagesPerQuery\": 3,\n  \"resultsPerPage\": 100,\n  \"languageCode\": \"tr\",\n  \"countryCode\": \"tr\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1648,
+        6960
+      ],
+      "id": "9ee5da15-f799-49f5-8e5d-f6294a73107e",
+      "name": "Start Google Search"
+    },
+    {
+      "parameters": {
+        "amount": 30
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1856,
+        6960
+      ],
+      "id": "d5acc57e-c01a-4ac5-9934-d56476efa4da",
+      "name": "Wait 30s",
+      "webhookId": "wait-search-1"
+    },
+    {
+      "parameters": {
+        "url": "https://api.apify.com/v2/acts/apify~google-search-scraper/runs/last?token=APIFY_TOKEN_BURAYA_GIRILECEK",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2048,
+        6960
+      ],
+      "id": "f8fbd0c4-16ed-46bb-9864-086f694d1c4b",
+      "name": "Check Status"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "status-check",
+              "leftValue": "={{ $json.data.status }}",
+              "rightValue": "SUCCEEDED",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2256,
+        6960
+      ],
+      "id": "1edef2da-52ed-4725-b238-c2ed7bdf365c",
+      "name": "Done?"
+    },
+    {
+      "parameters": {
+        "amount": 30
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2144,
+        7232
+      ],
+      "id": "f6ecb000-7881-4311-a1b9-0d1529948203",
+      "name": "Wait Retry",
+      "webhookId": "wait-retry-1"
+    },
+    {
+      "parameters": {
+        "url": "https://api.apify.com/v2/acts/apify~google-search-scraper/runs/last/dataset/items?token=APIFY_TOKEN_BURAYA_GIRILECEK",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2448,
+        6944
+      ],
+      "id": "52ea89d9-53c6-4c31-9e8c-738f18395dba",
+      "name": "Get Results"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Google Search sonuçlarından URL'leri çıkar\nconst results = [];\n\n// Get Today Sector'dan lokasyon ve sektör al\nlet lokasyon = '';\nlet sektor = '';\ntry { \n  lokasyon = $('Get Today Sector').item.json.Lokasyon || ''; \n  sektor = $('Get Today Sector').item.json.Sektor || '';\n} catch(e) {}\n\n// items[0].json bir array olarak geliyor\nconst allData = Array.isArray(items[0].json) ? items[0].json : items.map(i => i.json);\n\nfor (const data of allData) {\n  const organicResults = data.organicResults || [];\n  \n  for (const result of organicResults) {\n    if (result.url && \n        !result.url.includes('google.com') && \n        !result.url.includes('youtube.com') &&\n        !result.url.includes('facebook.com') &&\n        !result.url.includes('instagram.com') &&\n        !result.url.includes('twitter.com') &&\n        !result.url.includes('linkedin.com') &&\n        !result.url.includes('sahibinden.com') &&\n        !result.url.includes('sikayetvar.com')) {\n      results.push({\n        json: {\n          url: result.url,\n          title: result.title || '',\n          description: result.description || '',\n          lokasyon: lokasyon,\n          sektor: sektor\n        }\n      });\n    }\n  }\n}\n\n// Duplicate URL'leri kaldır (domain bazlı)\nconst seen = new Set();\nconst unique = results.filter(item => {\n  try {\n    const domain = item.json.url.match(/https?:\\/\\/([^\\/]+)/i)[1].replace('www.', '');\n    if (seen.has(domain)) return false;\n    seen.add(domain);\n    return true;\n  } catch {\n    return false;\n  }\n});\n\n// Max 30 işletme limiti\nreturn unique.slice(0, 30);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2656,
+        6944
+      ],
+      "id": "b410bdf8-58a6-4ff8-a3c8-3f8aa739511d",
+      "name": "Extract URLs",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        2864,
+        6944
+      ],
+      "id": "f0194239-86b3-44f6-b44e-ae5f51d17953",
+      "name": "Loop"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "Accept",
+              "value": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            },
+            {
+              "name": "Accept-Language",
+              "value": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 15000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3088,
+        6960
+      ],
+      "id": "959e692b-bd79-49e1-a13c-cfaace94b2f7",
+      "name": "Scrape Website",
+      "alwaysOutputData": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "has-email",
+              "leftValue": "={{ $json.Email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3456,
+        6960
+      ],
+      "id": "34fd4e44-da1e-437f-a794-dfac586e6998",
+      "name": "Has Email?"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "11vSrTS4d7Z4x_6z-v5WOFahlkklqPKBvYlB40oeANgM",
+          "mode": "list",
+          "cachedResultName": "Iron Mountain",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11vSrTS4d7Z4x_6z-v5WOFahlkklqPKBvYlB40oeANgM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 987142293,
+          "mode": "list",
+          "cachedResultName": "Scanner",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/11vSrTS4d7Z4x_6z-v5WOFahlkklqPKBvYlB40oeANgM/edit#gid=987142293"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Company Name": "={{ $json['Company Name'] }}",
+            "E-mail": "={{ $json.Email }}",
+            "Category": "={{ $json.Category }}",
+            "Phone": "={{ $json.Phone }}",
+            "Website": "={{ $json.Website }}",
+            "Lokasyon": "={{ $json.Lokasyon }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Lokasyon",
+              "displayName": "Lokasyon",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Website",
+              "displayName": "Website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        4160,
+        6944
+      ],
+      "id": "dcd64981-441e-40a5-8647-40548583c8d2",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "nxwxel5DBqk1teny",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        3952,
+        7184
+      ],
+      "id": "f54cb76e-e36a-430c-91f6-c1df93750037",
+      "name": "Skip Wait",
+      "webhookId": "skip-wait-1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.brevo.com/v3/smtp/email",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-key",
+              "value": "BREVO_API_KEY_BURAYA_GIRILECEK"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"sender\": {\n    \"name\": \"YO Dijital Medya A.Ş.\",\n    \"email\": \"info@yodijital.com\"\n  },\n  \"to\": [\n    {\n      \"email\": \"cnursuay@gmail.com\"\n    }\n  ],\n  \"subject\": \"{{ $json['Company Name'] }} | Müşteriye İhtiyacınız Varsa Çözüm Üretebiliriz.\",\n  \"htmlContent\": \"<p>Merhaba <strong>{{ $json['Company Name'] }}</strong> Yetkilisi,</p><p>YO Dijital olarak <strong>{{ $json['Lokasyon'] }}</strong>'daki işletmelere Google ve Meta reklamlarıyla daha fazla talep (arama, WhatsApp, Instagram DM, form) getirip bütçeyi verimli yönetmeye odaklanıyoruz. İhtiyaç olursa SEO ve web sitesi tarafında da destek veriyoruz.</p><p>Sektörünüze özel geliştirdiğimiz strateji sayesinde kısa sürede uygulanabilir bir planla müşteri sayınızı ve cironuzu artırabiliriz.</p><p>Tamamen ücretsiz 15 dakikalık bir görüşmede hedefinizi netleştirip size uygun kârlılık ve müşteri kazanım planını çıkaralım.</p><p>Saygılarımızla,<br><strong>YO Dijital Medya A.Ş.</strong><br>Telefon: 0538 234 32 00</p>\"\n}",
+        "options": {}
+      },
+      "id": "c0abb4e8-de36-4add-80be-81850dba9ac3",
+      "name": "Send Email Brevo2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        4352,
+        6944
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Check Duplicate'den gelen sonuç\nconst duplicateResult = items[0].json;\n\n// Has Email? node'undan orijinal veriyi al\nconst originalData = $('Has Email?').item.json;\n\n// Eğer sonuç boşsa veya E-mail alanı yoksa → yeni email\nif (!duplicateResult || !duplicateResult['E-mail'] || Object.keys(duplicateResult).length === 0) {\n  return [{ json: originalData }];\n}\n\n// Email zaten varsa → boş döndür (devam etme)\nreturn [];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3776,
+        6896
+      ],
+      "id": "6ca71f06-e3c4-4568-a140-bcf898eec61e",
+      "name": "Is New Email"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily 0900": {
+      "main": [
+        [
+          {
+            "node": "Get Today Sector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Today Sector": {
+      "main": [
+        [
+          {
+            "node": "Start Google Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Duplicate": {
+      "main": [
+        [
+          {
+            "node": "Is New Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sektor Log": {
+      "main": [
+        [
+          {
+            "node": "Random Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Info1": {
+      "main": [
+        [
+          {
+            "node": "Has Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Output1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Random Wait1": {
+      "main": [
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start Google Search": {
+      "main": [
+        [
+          {
+            "node": "Wait 30s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 30s": {
+      "main": [
+        [
+          {
+            "node": "Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Status": {
+      "main": [
+        [
+          {
+            "node": "Done?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Done?": {
+      "main": [
+        [
+          {
+            "node": "Get Results",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait Retry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Retry": {
+      "main": [
+        [
+          {
+            "node": "Check Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Results": {
+      "main": [
+        [
+          {
+            "node": "Extract URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract URLs": {
+      "main": [
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Scrape Website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape Website": {
+      "main": [
+        [
+          {
+            "node": "Extract Info1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Email?": {
+      "main": [
+        [
+          {
+            "node": "Check Duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Skip Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Send Email Brevo2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Skip Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email Brevo2": {
+      "main": [
+        [
+          {
+            "node": "Sektor Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is New Email": {
+      "main": [
+        [
+          {
+            "node": "Format Output1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "92eb4049-b8b9-4214-96cb-5578a99cdf14",
+  "meta": {
+    "instanceId": "483fe9c64626ade09751a9df7106a1e470e2971351b1721b6ebec502ae2fed97"
+  },
+  "id": "5HVYQlrZKkki3zEM",
+  "tags": []
+}
