@@ -17,7 +17,7 @@ logging.disable(logging.CRITICAL)
 
 from concurrent.futures import ThreadPoolExecutor
 from scraper.email_extractor import EmailExtractor
-from utils.filters import extract_domain_from_url
+from utils.filters import extract_domain_from_url, is_aggregator_website
 from config import BLOCKED_EMAIL_DOMAINS, BLOCKED_EMAIL_PREFIXES, BLOCKED_DOMAIN_SUFFIXES
 
 
@@ -83,6 +83,10 @@ def zenginlestir(kayit: dict) -> dict:
     """Tek isletme icin e-posta + iletisim kanallarini cikar."""
     ad = kayit.get("title", "")
     site = kayit.get("website") or ""
+    # Instagram/Facebook gibi toplayici adresler isletmenin SITESI DEGILDIR.
+    # Guard yoksa alan adi instagram.com sanilip info@instagram.com uretiliyor.
+    if site and is_aggregator_website(site):
+        site = ""
     site_dom = extract_domain_from_url(site) if site else ""
     adaylar = set(temizle(e) for e in (kayit.get("emails") or []) if e)
 
