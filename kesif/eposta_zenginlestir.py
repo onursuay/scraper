@@ -11,7 +11,7 @@ Buradaki kural: bir e-posta ancak su ikisinden biriyse lead sayilir.
 Bunlarin disindaki her adres UCUNCU TARAF sayilir ve elenir.
 """
 import re, sys, warnings, logging, os
-sys.path.insert(0, "/Users/onursuay/Desktop/Agency Wizard/Google Map Scrapper")
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 warnings.filterwarnings("ignore")
 logging.disable(logging.CRITICAL)
 

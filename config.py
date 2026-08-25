@@ -4,16 +4,26 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Apify (Google Maps kesif motoru)
+APIFY_TOKEN_FILE = os.getenv(
+    "APIFY_TOKEN_FILE",
+    "/Users/onursuay/Desktop/Agency Wizard/Dökümanlar/google-api-setup/apify_token.json",
+)
+APIFY_TOKEN = os.getenv("APIFY_TOKEN", "")
+
 # Firecrawl
 FIRECRAWL_API_KEY = os.getenv("FIRECRAWL_API_KEY", "")
 
 # Google Sheets
 GOOGLE_SHEET_URL = os.getenv(
     "GOOGLE_SHEET_URL",
-    "https://docs.google.com/spreadsheets/d/11vSrTS4d7Z4x_6z-v5WOFahlkklqPKBvYlB40oeANgM/edit"
+    "https://docs.google.com/spreadsheets/d/1lopLbx-37I2N4q31KH8_XVCP4rP6DDC23Kp82XgGC_Y/edit"
 )
 SHEET_NAME = "Scanner"
-SERVICE_ACCOUNT_FILE = os.path.join(os.path.dirname(__file__), "credentials", "service_account.json")
+SERVICE_ACCOUNT_FILE = os.getenv(
+    "GOOGLE_SERVICE_ACCOUNT_FILE",
+    os.path.join(os.path.dirname(__file__), "credentials", "service_account.json"),
+)
 
 
 def get_google_credentials(scopes):
@@ -141,4 +151,9 @@ USER_AGENTS = [
 # Sütun basliklari
 # Not: "Tip" SONA eklendi (kurumsal/kisisel/tahmin). Domain hala F sutununda kalmali
 # (sheets_manager._load_existing_domains F sutununu okuyor) - sira degistirilmemeli.
-SHEET_COLUMNS = ["Tarih", "Sektör", "Firma Adı", "Telefon", "E-posta", "Domain", "Web Sitesi", "Instagram", "Facebook", "LinkedIn", "Tip"]
+SHEET_COLUMNS = [
+    "Tarih", "Sektör", "Firma Adı", "İlçe", "Kategori", "Adres", "Telefon",
+    "E-posta", "Tip", "Tüm E-postalar", "Elenen (üçüncü taraf)",
+    "Domain", "Web Sitesi", "Instagram", "Facebook", "LinkedIn",
+    "Puan", "Yorum Sayısı", "Harita", "Süreç", "Görüşme Sonucu",
+]

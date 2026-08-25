@@ -12,7 +12,10 @@ import warnings
 from flask import Flask, render_template, request, jsonify, redirect, session, make_response, g
 from flask_socketio import SocketIO
 
-from scraper.maps_scraper import BusinessScraper
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'kesif'))
+from maps_apify import BusinessScraper  # Places API yerine Apify Maps
+from islem import isle as _isle
 from scraper.email_extractor import EmailExtractor
 from sheets.sheets_manager import SheetsManager
 from sheets.leads_manager import LeadsManager
@@ -313,7 +316,7 @@ def run_scan(sector: str, city: str, min_results: int):
             return
 
         scan_state["total"] = len(raw_businesses)
-        add_log(f"{len(raw_businesses)} web siteli işletme bulundu, e-postalar çıkarılıyor...")
+        add_log(f"{len(raw_businesses)} işletme bulundu (sitesizler dahil), iletişim bilgileri çıkarılıyor...")
 
         # 3. E-posta cikarma - min_results kurumsal e-posta bulana kadar devam et
         scan_state["status"] = "E-postalar çıkarılıyor..."
@@ -343,73 +346,22 @@ def run_scan(sector: str, city: str, min_results: int):
                 break
 
             scan_state["progress"] = i
-            website = biz.get("website", "")
-            if not website:
+            etiket = biz.get("maps_name") or biz.get("website") or "?"
+            scan_state["status"] = f"[{i}/{scan_state['total']}] {etiket} taranıyor... ({len(valid_businesses)}/{min_results} kayıt)"
+
+            result = _isle(biz, extractor, sector)
+
+            if sheets.is_duplicate(result["anahtar"]):
+                add_log(f"[{i}/{scan_state['total']}] MÜKERRER - {result['name']}")
                 continue
 
-            # Aggregator/sosyal medya sitelerini atla (sahibinden, instagram vb.)
-            if is_aggregator_website(website):
-                add_log(f"[{i}/{scan_state['total']}] Aggregator/sosyal site atlandı: {website}")
-                continue
+            if result["email"]:
+                add_log(f"  → {result['name']} - {result['email']} [{result['type']}]")
+            else:
+                add_log(f"  → {result['name']} - e-posta yok, telefon: {result['phone'] or '-'}")
 
-            domain = extract_domain_from_url(website)
-
-            if sheets.is_duplicate(domain):
-                add_log(f"[{i}/{scan_state['total']}] MÜKERRER - {domain}")
-                continue
-
-            scan_state["status"] = f"[{i}/{scan_state['total']}] {domain} taranıyor... ({len(valid_businesses)}/{min_results} e-posta bulundu)"
-            add_log(f"[{i}/{scan_state['total']}] {domain} taranıyor...")
-
-            contact = extractor.extract_contact_email(website)
-            if not contact["email"]:
-                add_log(f"  → E-posta bulunamadı.")
-                continue
-
-            # Firma adini belirle (3 asamali):
-            # 1. Google Places API'den gelen ad (en guvenilir)
-            maps_name = biz.get("maps_name", "").strip()
-            # Uzun Google isimlerini temizle (| ve - ile ayrilmis kisimlari kes)
-            if maps_name:
-                for sep in [" | ", " - ", " – "]:
-                    if sep in maps_name:
-                        maps_name = maps_name.split(sep)[0].strip()
-                        break
-                # Cok uzunsa kirp
-                if len(maps_name) > 50:
-                    maps_name = maps_name[:50].rsplit(" ", 1)[0]
-
-            # 2. Web sitesinin <title> etiketinden
-            site_title = extractor.extract_site_title(website)
-
-            # 3. Domain'den tahmin (son care)
-            domain_name = domain_to_business_name(website)
-
-            # En iyi adi sec: Google Places > Site Title > Domain
-            business_name = maps_name or site_title or domain_name
-            email = contact["email"]
-            email_type = contact["type"]
-
-            # Sosyal medya linklerini cikar
-            social = extractor.extract_social_links(website)
-            today = datetime.now().strftime("%Y-%m-%d")
-
-            result = {
-                "date": today,
-                "sector": sector,
-                "name": business_name,
-                "phone": biz.get("phone", ""),
-                "email": email,
-                "domain": domain,
-                "website": website,
-                "instagram": social.get("instagram", ""),
-                "facebook": social.get("facebook", ""),
-                "linkedin": social.get("linkedin", ""),
-                "type": email_type,
-            }
             valid_businesses.append(result)
             scan_state["results"].append(result)
-            add_log(f"  → BULUNDU: {business_name} - {email} [{email_type}]")
 
         # 4. Sheets'e kaydet
         if valid_businesses:

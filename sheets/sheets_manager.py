@@ -90,16 +90,23 @@ class SheetsManager:
         return result
 
     def _load_existing_domains(self):
-        """Mevcut domainleri yukle (F sutunu - Domain)."""
+        """Mukerrer anahtarlarini yukle: Domain + Telefon sutunlari.
+
+        Sutun numarasi SHEET_COLUMNS'tan hesaplanir - sema degisince kaymaz.
+        Web sitesi olmayan isletmeler telefonla eslesir.
+        """
         try:
-            domain_col = self.worksheet.col_values(6)  # F sutunu = Domain
-            # Basligi atla
-            self.existing_domains = {
-                d.lower().strip() for d in domain_col[1:] if d.strip()
-            }
-            logger.info(f"Mevcut {len(self.existing_domains)} domain yuklendi.")
+            self.existing_domains = set()
+            for basligi in ("Domain", "Telefon"):
+                if basligi not in SHEET_COLUMNS:
+                    continue
+                idx = SHEET_COLUMNS.index(basligi) + 1
+                for d in self.worksheet.col_values(idx)[1:]:
+                    if d and d.strip():
+                        self.existing_domains.add(d.lower().strip())
+            logger.info(f"Mevcut {len(self.existing_domains)} mukerrer anahtari yuklendi.")
         except Exception as e:
-            logger.warning(f"Domain yukleme hatasi: {e}")
+            logger.warning(f"Mukerrer anahtari yukleme hatasi: {e}")
             self.existing_domains = set()
 
     def is_duplicate(self, domain: str) -> bool:
@@ -120,7 +127,9 @@ class SheetsManager:
 
         rows = []
         for biz in businesses:
-            domain = biz["domain"].lower().strip()
+            domain = (biz.get("anahtar") or biz.get("domain") or "").lower().strip()
+            if not domain:
+                continue
             if domain in self.existing_domains:
                 logger.debug(f"Mukerrer atlanıyor: {domain}")
                 continue
@@ -128,15 +137,24 @@ class SheetsManager:
             rows.append([
                 biz.get("date", ""),
                 biz.get("sector", ""),
-                biz["name"],
-                biz["phone"],
-                biz["email"],
-                biz["domain"],
+                biz.get("name", ""),
+                biz.get("ilce", ""),
+                biz.get("kategori", ""),
+                biz.get("adres", ""),
+                biz.get("phone", ""),
+                biz.get("email", ""),
+                biz.get("type", ""),
+                biz.get("tum_epostalar", ""),
+                biz.get("elenen", ""),
+                biz.get("domain", ""),
                 biz.get("website", ""),
                 biz.get("instagram", ""),
                 biz.get("facebook", ""),
                 biz.get("linkedin", ""),
-                biz.get("type", ""),
+                biz.get("puan", ""),
+                biz.get("yorum", ""),
+                biz.get("harita", ""),
+                "", "",
             ])
             self.existing_domains.add(domain)
 
