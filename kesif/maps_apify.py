@@ -128,8 +128,8 @@ class BusinessScraper:
             return ""
         return (
             f"Apify aylik kredisi doldu: {simdi:.2f} / {tavan:.2f} USD. "
-            f"Yeni koşu baslatilamaz. Kredi {bitis} tarihinde yenilenir "
-            f"(ya da hesap ucretli plana gecirilir)."
+            f"Yeni koşu baslatilamaz. Mevcut donem {bitis} gunu sona erer, "
+            f"kredi ertesi gun yenilenir (ya da hesap ucretli plana gecirilir)."
         )
 
     def close_browser(self):
