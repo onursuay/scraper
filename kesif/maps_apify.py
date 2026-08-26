@@ -101,12 +101,36 @@ class BusinessScraper:
         self.butce_usd = float(butce_usd) if butce_usd is not None else varsayilan
         self.token = None
         self._baslangic_harcama = None
+        self.son_hata = ""      # kosu baslatilamazsa platformun HAM yaniti burada durur
 
     # --- arayuz uyumlulugu ---
     def start_browser(self):
         self.token = _token()
         self._baslangic_harcama = self.harcanan_usd()
+        self.son_hata = ""
+        uyari = self.limit_asildi_mi()
+        if uyari:
+            self.son_hata = uyari
+            logger.error(uyari)
         logger.info("Apify Google Maps kesif motoru hazir.")
+
+    def limit_asildi_mi(self) -> str:
+        """Hesabin aylik sert limiti asildiysa aciklayici metin dondur, degilse bos."""
+        try:
+            d = self._get("users/me/limits")["data"]
+            tavan = float(d["limits"]["maxMonthlyUsageUsd"])
+            simdi = float(d["current"]["monthlyUsageUsd"])
+            bitis = d.get("monthlyUsageCycle", {}).get("endAt", "")[:10]
+        except Exception as e:
+            logger.warning(f"Apify limit bilgisi okunamadi: {e}")
+            return ""
+        if simdi < tavan:
+            return ""
+        return (
+            f"Apify aylik kredisi doldu: {simdi:.2f} / {tavan:.2f} USD. "
+            f"Yeni koşu baslatilamaz. Kredi {bitis} tarihinde yenilenir "
+            f"(ya da hesap ucretli plana gecirilir)."
+        )
 
     def close_browser(self):
         pass
@@ -208,7 +232,15 @@ class BusinessScraper:
             with urllib.request.urlopen(istek, timeout=60) as r:
                 run = json.load(r)["data"]
         except Exception as e:
-            logger.error(f"Apify kosu baslatilamadi ({konum}): {e}")
+            ham = ""
+            govde = getattr(e, "read", None)
+            if callable(govde):
+                try:
+                    ham = govde().decode("utf-8", "replace")[:400]
+                except Exception:
+                    ham = ""
+            self.son_hata = f"{e} {ham}".strip()
+            logger.error(f"Apify kosu baslatilamadi ({konum}): {self.son_hata}")
             return []
 
         while True:

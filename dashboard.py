@@ -310,8 +310,14 @@ def run_scan(sector: str, city: str, min_results: int):
             scraper.close_browser()
 
         if not raw_businesses:
-            scan_state["status"] = "Hiçbir işletme bulunamadı!"
-            add_log("Hiçbir işletme bulunamadı.")
+            hata = getattr(scraper, "son_hata", "")
+            if hata:
+                # Motor calismadi; "sonuc yok" demek yaniltici olur - gercek nedeni goster
+                scan_state["status"] = "Tarama yapılamadı — keşif motoru çalışmadı!"
+                add_log(f"Tarama yapılamadı: {hata}")
+            else:
+                scan_state["status"] = "Hiçbir işletme bulunamadı!"
+                add_log("Hiçbir işletme bulunamadı.")
             scan_state["running"] = False
             return
 
