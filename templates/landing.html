@@ -28,6 +28,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #060609; color: #fff; min-height: 100vh; overflow-x: hidden; font-size: 16px; }
 
         .btn-shimmer { position: relative; overflow: hidden; }
@@ -112,14 +114,14 @@
         .panel-footer { display: flex; align-items: center; justify-content: space-between; }
 
         /* Trust */
-        .trust-section { width: 100%; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); padding: 24px; background: rgba(255,255,255,0.01); }
+        .trust-section { scroll-margin-top: 84px; width: 100%; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); padding: 24px; background: rgba(255,255,255,0.01); }
         .trust-label { font-size: 11px; color: #374151; text-transform: uppercase; letter-spacing: 0.2em; text-align: center; margin-bottom: 16px; font-weight: 500; }
         .trust-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
         .trust-pill { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: #6b7280; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 6px 16px; border-radius: 9999px; }
         .trust-pill svg { width: 14px; height: 14px; }
 
         /* Features */
-        .features-section { position: relative; width: 100%; padding: 80px 24px; }
+        .features-section { position: relative; width: 100%; padding: 80px 24px; scroll-margin-top: 84px; }
         .features-glow { position: absolute; top: 50%; left: 25%; width: 500px; height: 500px; background: rgba(16,185,129,0.03); border-radius: 50%; filter: blur(120px); pointer-events: none; }
         .section-inner { position: relative; max-width: 1280px; margin: 0 auto; }
         .section-head { text-align: center; margin-bottom: 40px; }
@@ -128,7 +130,7 @@
         .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
         @media (max-width: 1024px) { .features-grid { grid-template-columns: repeat(2,1fr); } }
         @media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } .kpi-grid { grid-template-columns: repeat(2,1fr); } .lp-nav { display: none; } }
-        .feat-card { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 24px; transition: all 0.3s; }
+        .feat-card { scroll-margin-top: 92px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 24px; transition: all 0.3s; }
         .feat-card:hover { border-color: rgba(52,211,153,0.2); background: rgba(255,255,255,0.04); box-shadow: 0 0 30px rgba(16,185,129,0.06); }
         .feat-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: #34d399; }
         .feat-card h3 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
@@ -159,7 +161,7 @@
         .cmd-card p { font-size: 14px; color: #9ca3af; line-height: 1.6; }
 
         /* Bottom CTA */
-        .bottom-cta { position: relative; width: 100%; padding: 80px 24px; }
+        .bottom-cta { position: relative; width: 100%; padding: 64px 24px 72px; }
         .bottom-cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 400px; border-radius: 50%; background: radial-gradient(ellipse, rgba(16,185,129,0.08), transparent 70%); filter: blur(150px); pointer-events: none; }
         .bottom-cta-inner { position: relative; max-width: 640px; margin: 0 auto; text-align: center; }
         .bottom-cta-inner h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
@@ -176,6 +178,81 @@
         .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
         .footer-links a { font-size: 14px; color: #6b7280; text-decoration: none; transition: color 0.2s; }
         .footer-links a:hover { color: #d1d5db; }
+
+        /* Pricing */
+        .pricing-section { position: relative; width: 100%; padding: 80px 24px; scroll-margin-top: 84px; overflow: hidden; }
+        .pricing-glow { position: absolute; top: 18%; right: 12%; width: 520px; height: 520px; background: rgba(16,185,129,0.035); border-radius: 50%; filter: blur(130px); pointer-events: none; }
+        .cycle-wrap { display: flex; justify-content: center; margin-bottom: 36px; }
+        .cycle-switch { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 9999px; padding: 4px; }
+        .cycle-opt { font-family: inherit; font-size: 13.5px; font-weight: 600; color: #8a8f98; background: transparent; border: none; padding: 9px 22px; border-radius: 9999px; cursor: pointer; transition: color .2s, background .2s; display: inline-flex; align-items: center; gap: 7px; }
+        .cycle-opt:hover { color: #d1d5db; }
+        .cycle-opt.active { background: rgba(52,211,153,0.12); color: #34d399; }
+        .cycle-opt:focus-visible { outline: 2px solid #34d399; outline-offset: 2px; }
+        .cycle-tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; color: #0a0a0a; background: #34d399; padding: 2px 7px; border-radius: 9999px; }
+
+        .pricing-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; align-items: stretch; }
+        @media (max-width: 1100px) { .pricing-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+        @media (max-width: 640px)  { .pricing-grid { grid-template-columns: minmax(0,1fr); } }
+
+        .price-card { display: flex; flex-direction: column; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 24px 22px 22px; transition: border-color .3s, background .3s; }
+        .price-card:hover { border-color: rgba(52,211,153,0.22); background: rgba(255,255,255,0.04); }
+        .price-card.featured { border-color: rgba(52,211,153,0.35); background: linear-gradient(180deg, rgba(16,185,129,0.07), rgba(255,255,255,0.025)); box-shadow: 0 0 40px rgba(16,185,129,0.07); }
+        .price-badge-row { height: 24px; margin-bottom: 12px; display: flex; align-items: center; }
+        .price-badge { font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: #34d399; background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.25); padding: 3px 10px; border-radius: 9999px; }
+        .price-name { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+        .price-role { font-size: 13px; color: #6b7280; line-height: 1.5; min-height: 39px; }
+
+        .price-amount { display: flex; align-items: baseline; gap: 4px; margin-top: 16px; }
+        .price-amount .num { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; color: #fff; line-height: 1; }
+        .price-amount .per { font-size: 13px; color: #6b7280; font-weight: 500; }
+        .price-note { font-size: 12px; color: #6b7280; margin-top: 6px; min-height: 18px; }
+
+        .vol-block { margin: 18px 0 16px; }
+        .vol-figure { display: flex; align-items: baseline; gap: 6px; margin-bottom: 8px; }
+        .vol-figure b { font-size: 20px; font-weight: 800; color: #34d399; letter-spacing: -0.02em; line-height: 1; }
+        .vol-figure span { font-size: 12.5px; color: #9ca3af; }
+        .vol-track { height: 4px; border-radius: 2px; background: rgba(255,255,255,0.07); overflow: hidden; }
+        .vol-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, #10b981, #2dd4bf); }
+        .vol-fill.open { background: repeating-linear-gradient(90deg, rgba(52,211,153,0.55) 0 6px, transparent 6px 12px); }
+
+        .price-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 20px; flex: 1; }
+        .price-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; color: #cbd5e1; line-height: 1.55; }
+        .price-list svg { width: 13px; height: 13px; flex-shrink: 0; margin-top: 4px; color: #34d399; }
+        .price-list li.inherit { color: #8a8f98; }
+
+        .price-cta { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 13.5px; font-weight: 600; padding: 12px 18px; border-radius: 9999px; text-decoration: none; border: 1px solid rgba(52,211,153,0.3); color: #34d399; background: transparent; transition: background .2s, transform .2s; }
+        .price-cta:hover { background: rgba(52,211,153,0.1); }
+        .price-cta:focus-visible { outline: 2px solid #34d399; outline-offset: 2px; }
+        .price-cta.solid { background: linear-gradient(90deg, #10b981, #14b8a6); color: #000; border-color: transparent; box-shadow: 0 0 26px rgba(16,185,129,0.18); }
+        .price-cta.solid:hover { background: linear-gradient(90deg, #059669, #0f766e); }
+        .pricing-foot { text-align: center; font-size: 13px; color: #6b7280; margin-top: 28px; line-height: 1.7; }
+
+        /* Contact */
+        .contact-section { position: relative; width: 100%; padding: 64px 24px 56px; background: rgba(255,255,255,0.015); border-top: 1px solid rgba(255,255,255,0.04); scroll-margin-top: 84px; overflow: hidden; }
+        .contact-glow { position: absolute; top: 40%; left: 20%; width: 420px; height: 420px; background: rgba(20,184,166,0.04); border-radius: 50%; filter: blur(120px); pointer-events: none; }
+        .contact-inner { position: relative; max-width: 760px; margin: 0 auto; text-align: center; }
+        .contact-mail { display: inline-flex; align-items: center; gap: 12px; font-size: clamp(1.15rem, 2.6vw, 1.6rem); font-weight: 700; letter-spacing: -0.02em; color: #fff; text-decoration: none; border: 1px solid rgba(52,211,153,0.28); background: rgba(52,211,153,0.06); padding: 16px 30px; border-radius: 9999px; margin: 26px 0 30px; transition: background .2s, border-color .2s; }
+        .contact-mail:hover { background: rgba(52,211,153,0.12); border-color: rgba(52,211,153,0.45); }
+        .contact-mail:focus-visible { outline: 2px solid #34d399; outline-offset: 3px; }
+        .contact-mail svg { width: 20px; height: 20px; color: #34d399; flex-shrink: 0; }
+        .contact-hint { font-size: 13px; color: #6b7280; text-transform: uppercase; letter-spacing: .16em; font-weight: 500; margin-bottom: 14px; }
+        .contact-asks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; text-align: left; }
+        @media (max-width: 720px) { .contact-asks { grid-template-columns: minmax(0,1fr); } }
+        .ask-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 16px 18px; }
+        .ask-num { font-size: 10.5px; font-weight: 700; color: #34d399; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 7px; }
+        .ask-card p { font-size: 13.5px; color: #cbd5e1; line-height: 1.55; }
+
+        @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+        /* Dar ekranda başlık sağ bloğu taşıyordu: ikincil bağlantılar gizlenir */
+        @media (max-width: 720px) {
+            .lp-header-inner { padding: 10px 16px; gap: 10px; }
+            .lp-right { gap: 6px; flex-wrap: nowrap; }
+            .lp-right .pill-base:not(.pill-filled) { display: none; }
+            .lp-login { padding: 8px 6px; font-size: 13px; }
+            .lp-right .pill-base { padding: 8px 14px; font-size: 13px; }
+        }
+        @media (max-width: 400px) { .lp-logo span { display: none; } }
     </style>
 </head>
 <body>
@@ -189,48 +266,48 @@
 
         <nav class="lp-nav">
             <div class="dd-wrap">
-                <button class="pill-base btn-shimmer">
+                <a href="#ozellikler" class="pill-base btn-shimmer">
                     <span data-i18n="nav-product">Ürün</span>
                     <svg class="dd-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
+                </a>
                 <div class="dd-menu">
                     <div class="dd-grid-3">
-                        <a href="#ozellikler" class="dd-item">
+                        <a href="#ozellik-maps" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                                 <span data-i18n="dd-maps-title">Google Maps Tarama</span>
                             </div>
                             <p data-i18n="dd-maps-desc">Sektör ve şehir bazlı arama ile işletmeleri otomatik listeleyin.</p>
                         </a>
-                        <a href="#ozellikler" class="dd-item">
+                        <a href="#ozellik-iletisim-bilgisi" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                 <span data-i18n="dd-contact-title">İletişim Bilgisi Çekme</span>
                             </div>
                             <p data-i18n="dd-contact-desc">Web sitelerinden e-posta, telefon ve sosyal medya hesaplarını bulun.</p>
                         </a>
-                        <a href="#ozellikler" class="dd-item">
+                        <a href="#ozellik-sheets" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
                                 <span data-i18n="dd-sheets-title">Google Sheets Entegrasyonu</span>
                             </div>
                             <p data-i18n="dd-sheets-desc">Toplanan verileri otomatik olarak Google Sheets'e aktarın.</p>
                         </a>
-                        <a href="#ozellikler" class="dd-item">
+                        <a href="#ozellik-excel" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 <span data-i18n="dd-excel-title">Excel / CSV Import</span>
                             </div>
                             <p data-i18n="dd-excel-desc">Harici listelerinizi adım adım sihirbaz ile içe aktarın.</p>
                         </a>
-                        <a href="#ozellikler" class="dd-item">
+                        <a href="#ozellik-eposta" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                 <span data-i18n="dd-email-title">Toplu E-posta Gönderme</span>
                             </div>
                             <p data-i18n="dd-email-desc">Toplanan listelere SMTP üzerinden toplu e-posta gönderin.</p>
                         </a>
-                        <a href="#ozellikler" class="dd-item">
+                        <a href="#ozellik-clickbot" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
                                 <span data-i18n="dd-clickbot-title">Click Bot</span>
@@ -242,34 +319,34 @@
             </div>
 
             <div class="dd-wrap">
-                <button class="pill-base btn-shimmer">
+                <a href="#entegrasyonlar" class="pill-base btn-shimmer">
                     <span data-i18n="nav-integrations">Entegrasyonlar</span>
                     <svg class="dd-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-                </button>
+                </a>
                 <div class="dd-menu">
                     <div class="dd-grid-2">
-                        <a href="#entegrasyonlar" class="dd-item">
+                        <a href="#ozellik-maps" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                                 <span data-i18n="di-maps-title">Google Maps</span>
                             </div>
                             <p data-i18n="di-maps-desc">İşletme verileri, adres, telefon ve web sitesi bilgisi.</p>
                         </a>
-                        <a href="#entegrasyonlar" class="dd-item">
+                        <a href="#ozellik-sheets" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
                                 <span data-i18n="di-sheets-title">Google Sheets</span>
                             </div>
                             <p data-i18n="di-sheets-desc">Verileri doğrudan kendi Google Sheets'inize aktarın.</p>
                         </a>
-                        <a href="#entegrasyonlar" class="dd-item">
+                        <a href="#ozellik-excel" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 <span data-i18n="di-excel-title">Excel / CSV</span>
                             </div>
                             <p data-i18n="di-excel-desc">Tüm verileri Excel veya CSV formatında dışa aktarın.</p>
                         </a>
-                        <a href="#entegrasyonlar" class="dd-item">
+                        <a href="#ozellik-eposta" class="dd-item">
                             <div class="dd-item-head">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                                 <span data-i18n="di-smtp-title">SMTP / E-posta</span>
@@ -391,32 +468,32 @@
             <p data-i18n="feat-sub">İşletme verisi toplamanın tüm adımlarını kapsayan altı temel modül.</p>
         </div>
         <div class="features-grid">
-            <div class="feat-card">
+            <div class="feat-card" id="ozellik-maps">
                 <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
                 <h3 data-i18n="feat1-title">Google Maps Tarama</h3>
                 <p data-i18n="feat1-desc">Sektör ve şehir bazlı arama yaparak binlerce işletmeyi saniyeler içinde listeleyin. Adres, telefon, web sitesi ve puanları otomatik çekin.</p>
             </div>
-            <div class="feat-card">
+            <div class="feat-card" id="ozellik-iletisim-bilgisi">
                 <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
                 <h3 data-i18n="feat2-title">İletişim Bilgisi Çekme</h3>
                 <p data-i18n="feat2-desc">Web sitelerini tarayarak e-posta adresleri, telefon numaraları ve sosyal medya hesaplarını otomatik bulun ve kaydedin.</p>
             </div>
-            <div class="feat-card">
+            <div class="feat-card" id="ozellik-sheets">
                 <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg></div>
                 <h3 data-i18n="feat3-title">Google Sheets Entegrasyonu</h3>
                 <p data-i18n="feat3-desc">Toplanan verileri kendi Google hesabınıza bağlayarak doğrudan Google Sheets'e aktarın. Gerçek zamanlı senkronizasyon.</p>
             </div>
-            <div class="feat-card">
+            <div class="feat-card" id="ozellik-excel">
                 <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
                 <h3 data-i18n="feat4-title">Excel / CSV Import</h3>
                 <p data-i18n="feat4-desc">Harici listelerinizi 4 adımlı sihirbaz ile içe aktarın. Sütun eşleme otomatik yapılır, veritabanınıza tek tıkla ekleyin.</p>
             </div>
-            <div class="feat-card">
+            <div class="feat-card" id="ozellik-eposta">
                 <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
                 <h3 data-i18n="feat5-title">Toplu E-posta Gönderme</h3>
                 <p data-i18n="feat5-desc">Toplanan e-posta listelerine SMTP veya Gmail üzerinden kişiselleştirilmiş toplu kampanyalar gönderin.</p>
             </div>
-            <div class="feat-card">
+            <div class="feat-card" id="ozellik-clickbot">
                 <div class="feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg></div>
                 <h3 data-i18n="feat6-title">Click Bot</h3>
                 <p data-i18n="feat6-desc">Google Ads kampanyalarınızı izleyin. Otomatik tıklama botu ile rakip analizlerinizi ve reklam testlerinizi kolaylaştırın.</p>
@@ -469,12 +546,154 @@
     </div>
 </section>
 
+
+<!-- ═══════════ PRICING ═══════════ -->
+<section id="fiyatlandirma" class="pricing-section">
+    <div class="pricing-glow"></div>
+    <div class="section-inner">
+        <div class="section-head">
+            <h2 data-i18n="pr-h2">Ayda kaç işletmeye ulaşacağınızı siz seçin</h2>
+            <p data-i18n="pr-sub">Planlar aylık kayıt hakkına göre ayrılır. Kullanmadığınız hak bir sonraki aya devretmez.</p>
+        </div>
+
+        <div class="cycle-wrap">
+            <div class="cycle-switch" role="group" aria-label="Ödeme dönemi">
+                <button type="button" class="cycle-opt active" id="cycMonthly" onclick="setCycle('monthly')" data-i18n="pr-cyc-monthly">Aylık</button>
+                <button type="button" class="cycle-opt" id="cycYearly" onclick="setCycle('yearly')">
+                    <span data-i18n="pr-cyc-yearly">Yıllık</span><span class="cycle-tag" data-i18n="pr-cyc-save">%20 indirim</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+
+            <div class="price-card">
+                <div class="price-badge-row"></div>
+                <div class="price-name" data-i18n="pr1-name">Başlangıç</div>
+                <p class="price-role" data-i18n="pr1-role">Tek şehirde, tek sektörde liste çıkaran işletmeler için.</p>
+                <div class="price-amount">
+                    <span class="num"><span class="pr-m" data-price="2.293">₺2.293</span><span class="pr-y" style="display:none;">₺1.834</span></span>
+                    <span class="per" data-i18n="pr-per">/ ay</span>
+                </div>
+                <p class="price-note" data-i18n="pr-vat">KDV dahil</p>
+                <div class="vol-block">
+                    <div class="vol-figure"><b>1.000</b><span data-i18n="pr-vol">işletme kaydı / ay</span></div>
+                    <div class="vol-track"><div class="vol-fill" style="width:10%"></div></div>
+                </div>
+                <ul class="price-list">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr1-f1">81 ilde, 16 sektör başlığı altında arama</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr1-f2">Adres, telefon, web sitesi ve sosyal hesaplar</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr1-f3">E-posta çıkarma ve sahiplik denetimi</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr1-f4">Excel ve CSV olarak dışa aktarım</span></li>
+                </ul>
+                <a href="#iletisim" class="price-cta" data-i18n="pr-cta">Görüşme planlayın</a>
+            </div>
+
+            <div class="price-card featured">
+                <div class="price-badge-row"><span class="price-badge" data-i18n="pr-badge">En çok tercih edilen</span></div>
+                <div class="price-name" data-i18n="pr2-name">Profesyonel</div>
+                <p class="price-role" data-i18n="pr2-role">Birden çok sektöre ve şehre açılan satış ekipleri için.</p>
+                <div class="price-amount">
+                    <span class="num"><span class="pr-m">₺5.233</span><span class="pr-y" style="display:none;">₺4.186</span></span>
+                    <span class="per" data-i18n="pr-per2">/ ay</span>
+                </div>
+                <p class="price-note" data-i18n="pr-vat2">KDV dahil</p>
+                <div class="vol-block">
+                    <div class="vol-figure"><b>3.500</b><span data-i18n="pr-vol2">işletme kaydı / ay</span></div>
+                    <div class="vol-track"><div class="vol-fill" style="width:35%"></div></div>
+                </div>
+                <ul class="price-list">
+                    <li class="inherit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr2-f1">Başlangıç planındaki her şey</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr2-f2">Toplu e-posta kampanyası</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr2-f3">Birleşik veri tabanı, mükerrer kayıt eleme</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr2-f4">Excel ve CSV içe aktarma sihirbazı</span></li>
+                </ul>
+                <a href="#iletisim" class="price-cta solid" data-i18n="pr-cta2">Görüşme planlayın</a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-badge-row"></div>
+                <div class="price-name" data-i18n="pr3-name">Ajans</div>
+                <p class="price-role" data-i18n="pr3-role">Müşterileri adına düzenli liste çıkaran ajanslar için.</p>
+                <div class="price-amount">
+                    <span class="num"><span class="pr-m">₺11.113</span><span class="pr-y" style="display:none;">₺8.890</span></span>
+                    <span class="per" data-i18n="pr-per3">/ ay</span>
+                </div>
+                <p class="price-note" data-i18n="pr-vat3">KDV dahil</p>
+                <div class="vol-block">
+                    <div class="vol-figure"><b>10.000</b><span data-i18n="pr-vol3">işletme kaydı / ay</span></div>
+                    <div class="vol-track"><div class="vol-fill" style="width:100%"></div></div>
+                </div>
+                <ul class="price-list">
+                    <li class="inherit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr3-f1">Profesyonel planındaki her şey</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr3-f2">Click Bot</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr3-f3">Öncelikli destek</span></li>
+                </ul>
+                <a href="#iletisim" class="price-cta" data-i18n="pr-cta3">Görüşme planlayın</a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-badge-row"></div>
+                <div class="price-name" data-i18n="pr4-name">Kurumsal</div>
+                <p class="price-role" data-i18n="pr4-role">Hacmini kendi belirleyen, sözleşmeli çalışan kurumlar için.</p>
+                <div class="price-amount">
+                    <span class="num" data-i18n="pr4-price">Size özel</span>
+                </div>
+                <p class="price-note" data-i18n="pr4-note">Hacme göre belirlenir</p>
+                <div class="vol-block">
+                    <div class="vol-figure"><b data-i18n="pr4-vol-b">Sınır yok</b><span data-i18n="pr4-vol">birlikte planlanır</span></div>
+                    <div class="vol-track"><div class="vol-fill open" style="width:100%"></div></div>
+                </div>
+                <ul class="price-list">
+                    <li class="inherit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr4-f1">Ajans planındaki her şey</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr4-f2">Kendi sistemlerinize özel aktarım</span></li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="pr4-f3">Sözleşmeli destek</span></li>
+                </ul>
+                <a href="#iletisim" class="price-cta" data-i18n="pr-cta4">İletişime geçin</a>
+            </div>
+
+        </div>
+
+        <p class="pricing-foot" data-i18n="pr-foot">Yıllık ödemede iki aylık ücret düşer. Plan değişikliği ay içinde de yapılabilir.</p>
+    </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="iletisim" class="contact-section">
+    <div class="contact-glow"></div>
+    <div class="contact-inner">
+        <p class="contact-hint" data-i18n="ct-hint">İletişim</p>
+        <h2 style="font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-0.03em;margin-bottom:10px;" data-i18n="ct-h2">Başlamadan önce konuşalım</h2>
+        <p style="font-size:16px;color:#9ca3af;line-height:1.7;max-width:520px;margin:0 auto;" data-i18n="ct-sub">Hangi listeye ihtiyacınız olduğunu yazın, size uygun planı birlikte belirleyelim.</p>
+
+        <a href="mailto:info@dijimagic.com?subject=DijiScraper%20-%20Plan%20g%C3%B6r%C3%BC%C5%9Fmesi" class="contact-mail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@dijimagic.com
+        </a>
+
+        <div class="contact-asks">
+            <div class="ask-card">
+                <div class="ask-num" data-i18n="ct-l1">Kapsam</div>
+                <p data-i18n="ct-a1">Hangi sektörde ve hangi illerde çalışıyorsunuz?</p>
+            </div>
+            <div class="ask-card">
+                <div class="ask-num" data-i18n="ct-l2">Hacim</div>
+                <p data-i18n="ct-a2">Ayda kaç işletmeye ulaşmayı planlıyorsunuz?</p>
+            </div>
+            <div class="ask-card">
+                <div class="ask-num" data-i18n="ct-l3">Kullanım</div>
+                <p data-i18n="ct-a3">Listeyi kendi ekibiniz mi kullanacak, biz mi işleyelim?</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ═══════════ BOTTOM CTA ═══════════ -->
 <section class="bottom-cta">
     <div class="bottom-cta-glow"></div>
     <div class="bottom-cta-inner">
         <h2 data-i18n="cta-h2">Veri toplamaya hazır mısınız?</h2>
-        <p data-i18n="cta-sub">Hemen başlayın. Kurulum gerekmez, hesap oluşturmadan kullanın.</p>
+        <p data-i18n="cta-sub">Kurulum yok. Planınızı seçin, listeniz aynı gün çıkmaya başlasın.</p>
         <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;">
             <a href="/app" class="cta-bottom-primary btn-shimmer">
                 <span data-i18n="cta-btn">Uygulamayı Başlat</span>
@@ -642,7 +861,7 @@ const T = {
     'cmd3-title': 'Birleşik Veritabanı', 'cmd3-desc': 'Tüm kaynaklardan gelen veriler tek veritabanında toplanır, tekrarlar otomatik elenir.',
     'cmd4-title': 'Anlık Dışa Aktarım', 'cmd4-desc': "Excel, CSV veya Google Sheets'e tek tıkla dışa aktarın, dilediğiniz CRM'e yükleyin.",
     'cta-h2': 'Veri toplamaya hazır mısınız?',
-    'cta-sub': 'Hemen başlayın. Kurulum gerekmez, hesap oluşturmadan kullanın.',
+    'cta-sub': 'Kurulum yok. Planınızı seçin, listeniz aynı gün çıkmaya başlasın.',
     'cta-btn': 'Uygulamayı Başlat',
     'footer-copy': '© 2026 DijiMagic. Tüm hakları saklıdır.',
     'footer-privacy': 'Gizlilik Politikası', 'footer-terms': 'Kullanım Koşulları', 'footer-cookie': 'Çerez Politikası', 'footer-data': 'Veri Silme',
@@ -718,13 +937,50 @@ const T = {
     'cmd2-title': 'Smart Filters', 'cmd2-desc': 'Clean your lists with filters like has email, has website, or rating range.',
     'cmd3-title': 'Unified Database', 'cmd3-desc': 'Data from all sources is collected in one database, duplicates are automatically removed.',
     'cmd4-title': 'Instant Export', 'cmd4-desc': 'Export to Excel, CSV, or Google Sheets in one click, upload to any CRM.',
+    'pr-h2': 'Choose how many businesses you reach each month',
+    'pr-sub': 'Plans differ by monthly record allowance. Unused allowance does not roll over.',
+    'pr-cyc-monthly': 'Monthly', 'pr-cyc-yearly': 'Yearly', 'pr-cyc-save': '20% off',
+    'pr-badge': 'Most chosen',
+    'pr-per': '/ mo', 'pr-per2': '/ mo', 'pr-per3': '/ mo',
+    'pr-vat': 'VAT included', 'pr-vat2': 'VAT included', 'pr-vat3': 'VAT included',
+    'pr-vol': 'business records / mo', 'pr-vol2': 'business records / mo', 'pr-vol3': 'business records / mo',
+    'pr-cta': 'Book a call', 'pr-cta2': 'Book a call', 'pr-cta3': 'Book a call', 'pr-cta4': 'Get in touch',
+    'pr1-name': 'Starter', 'pr1-role': 'For businesses building lists in one city and one sector.',
+    'pr1-f1': 'Search across 81 provinces and 16 sector groups',
+    'pr1-f2': 'Address, phone, website and social accounts',
+    'pr1-f3': 'Email extraction with ownership checks',
+    'pr1-f4': 'Export to Excel and CSV',
+    'pr2-name': 'Professional', 'pr2-role': 'For sales teams expanding across sectors and cities.',
+    'pr2-f1': 'Everything in Starter', 'pr2-f2': 'Bulk email campaigns',
+    'pr2-f3': 'Unified database with duplicate removal', 'pr2-f4': 'Excel and CSV import wizard',
+    'pr3-name': 'Agency', 'pr3-role': 'For agencies building lists on behalf of clients.',
+    'pr3-f1': 'Everything in Professional', 'pr3-f2': 'Click Bot', 'pr3-f3': 'Priority support',
+    'pr4-name': 'Enterprise', 'pr4-role': 'For organisations setting their own volume under contract.',
+    'pr4-price': 'Custom', 'pr4-note': 'Based on volume', 'pr4-vol-b': 'No cap', 'pr4-vol': 'planned together',
+    'pr4-f1': 'Everything in Agency', 'pr4-f2': 'Delivery into your own systems', 'pr4-f3': 'Contracted support',
+    'pr-foot': 'Yearly billing takes two months off the price. You can change plans mid-month.',
+    'ct-hint': 'Contact', 'ct-h2': 'Let us talk before you start',
+    'ct-sub': 'Tell us which list you need and we will pick the right plan together.',
+    'ct-a1': 'Which sector and which provinces do you work in?',
+    'ct-a2': 'How many businesses do you plan to reach each month?',
+    'ct-a3': 'Will your own team work the list, or shall we process it?',
     'cta-h2': 'Ready to start collecting data?',
-    'cta-sub': 'Get started now. No setup required, use without an account.',
+    'cta-sub': 'No setup. Pick a plan and your list starts building the same day.',
+    'ct-l1': 'Scope', 'ct-l2': 'Volume', 'ct-l3': 'Usage',
     'cta-btn': 'Launch App',
     'footer-copy': '© 2026 DijiMagic. All rights reserved.',
     'footer-privacy': 'Privacy Policy', 'footer-terms': 'Terms of Service', 'footer-cookie': 'Cookie Policy', 'footer-data': 'Data Deletion',
   }
 };
+
+
+function setCycle(mode) {
+  var yearly = mode === 'yearly';
+  document.querySelectorAll('.pr-m').forEach(function (el) { el.style.display = yearly ? 'none' : ''; });
+  document.querySelectorAll('.pr-y').forEach(function (el) { el.style.display = yearly ? '' : 'none'; });
+  document.getElementById('cycMonthly').classList.toggle('active', !yearly);
+  document.getElementById('cycYearly').classList.toggle('active', yearly);
+}
 
 let currentLang = localStorage.getItem('lp_lang') || 'tr';
 
