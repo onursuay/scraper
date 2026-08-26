@@ -38,6 +38,13 @@ def mx_sunuculari(alan: str) -> list:
         mx = [str(r.exchange).rstrip(".") for r in sorted(yanit, key=lambda r: r.preference)]
     except Exception:
         mx = []
+    if not mx:
+        # Ortuk MX: MX kaydi yoksa alan adinin A kaydi posta sunucusu sayilir
+        try:
+            dns.resolver.resolve(alan, "A", lifetime=8)
+            mx = [alan]
+        except Exception:
+            mx = []
     _mx_onbellek[alan] = mx
     return mx
 
@@ -49,11 +56,6 @@ def _rcpt_sor(sunucu: str, adresler: list) -> dict:
         s = smtplib.SMTP(timeout=ZAMAN_ASIMI)
         s.connect(sunucu, 25)
         s.ehlo(HELO)
-        try:
-            s.starttls()
-            s.ehlo(HELO)
-        except Exception:
-            pass
         s.docmd("MAIL", f"FROM:<{GONDEREN}>")
         for a in adresler:
             try:
@@ -66,8 +68,8 @@ def _rcpt_sor(sunucu: str, adresler: list) -> dict:
             s.quit()
         except Exception:
             pass
-    except (socket.error, smtplib.SMTPException, OSError):
-        pass
+    except (socket.error, smtplib.SMTPException, OSError) as e:
+        sonuc["_hata"] = f"{type(e).__name__}"
     return sonuc
 
 
@@ -95,7 +97,7 @@ def dogrula_toplu(adresler: list, bekleme: float = 1.5) -> dict:
         mx = mx_sunuculari(alan)
         if not mx:
             for a in liste:
-                sonuc[a] = ("gecersiz", "MX kaydı yok")
+                sonuc[a] = ("belirsiz", "posta sunucusu bulunamadı")
             continue
 
         sunucu = mx[0]
@@ -113,7 +115,7 @@ def dogrula_toplu(adresler: list, bekleme: float = 1.5) -> dict:
             elif 500 <= kod < 600:
                 sonuc[a] = ("gecersiz", f"SMTP {kod}")
             elif kod == 0:
-                sonuc[a] = ("belirsiz", "bağlantı kurulamadı")
+                sonuc[a] = ("belirsiz", kodlar.get("_hata", "bağlantı kurulamadı"))
             else:
                 sonuc[a] = ("belirsiz", f"SMTP {kod}")
         time.sleep(bekleme)
