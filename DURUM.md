@@ -40,7 +40,9 @@ Domain L sütununa kaydı. Artık sütun numarası `SHEET_COLUMNS`'tan hesaplan�
 ## Yeni akış
 
 ```
-kesif/maps_apify.py           Apify Google Maps keşfi (60 tavanı yok, sitesizi atmaz)
+kesif/maps_apify.py           Apify Google Maps keşfi — ilçe yelpazeli, kümülatif bütçeli
+kesif/_ilceler.json           il -> ilçe listesi önbelleği (OpenStreetMap admin_level=6)
+kesif/_ilce_agirlik.json      ilçe başına ölçülen firma yoğunluğu (tarama sırasını belirler)
 kesif/islem.py                işletme -> lead satırı (sahiplik denetimli e-posta seçimi)
 kesif/eposta_zenginlestir.py  sahiplik kuralı + e-posta temizleme
 kesif/eposta_dogrula.py       SMTP ile adres doğrulama (posta GÖNDERMEZ, RCPT sorgusu)
@@ -58,7 +60,16 @@ lead sayılır. Diğerleri elenir ama `Elenen (üçüncü taraf)` sütununda gö
 - Kayıt başına maliyet: **0,0078 USD** (pilot ve Çankaya koşusunda birebir aynı)
 - Taranan: **545 işletme** / 4,47 USD (tamamı Apify ücretsiz kredisinden)
 - Web sitesi olan: 195 (%36) · telefonu olan: 503
-- Doğrulanmış e-posta: 63 · tahmin: 94 · yok: 381
+- Doğrulanmış e-posta: 63 · tahmin: 21 · yok: 461
+  (94 tahminin 73'ü `info@instagram.com` tuzağıydı, temizlendi)
+
+### SMTP doğrulaması (adres gerçekten var mı)
+
+| Durum | Adet |
+|---|---|
+| ✅ geçerli — gönderilebilir | **36** |
+| ❌ geçersiz — bounce ederdi, çıkarılmalı | 14 |
+| ⚠️ belirsiz — sunucu yanıt vermedi/kısıtladı | 34 |
 
 ## Kaynak karşılaştırması — sitesiz firmalara nasıl ulaşılır
 
@@ -75,12 +86,26 @@ Firmaların %64'ünün sitesi yok. Bu grup için e-posta kaynağı arandı:
 **Sonuç:** sitesiz firmalar için doğru yol Instagram değil **Facebook**; iki aşamalı
 (arama ile sayfayı bul → sayfa tarayıcısıyla e-postayı al). Henüz kurulmadı.
 
+## Panel geniş tarama yapabilir mi — evet
+
+Panel ilk bağlandığında tek "Ankara" sorgusu atıyordu; sonuçlar merkeze yığılıyordu.
+Artık ilin ilçeleri OSM'den alınıp tek tek taranıyor, sıra ölçülmüş yoğunluğa göre.
+
+🔴 Bu değişiklikle birlikte bir para riski kapatıldı: `maxTotalChargeUsd` koşu
+başınaydı, 25 ilçelik yelpazede bütçe 25 katına çıkabilirdi. Artık hesabın gerçek
+harcaması her ilçeden önce okunuyor, kalan bütçe bitince tarama duruyor.
+
+Doğrulama koşusu (0,15 USD tavan): Çankaya 16 + Yenimahalle 5 = 21 kayıt,
+harcanan 0,1486 USD, tavanda durdu.
+
+Tarama bütçesi `.env` içinde `APIFY_BUTCE_USD=2.0` (yaklaşık 250 firma/tarama).
+
 ## Bekleyenler
 
 | Konu | Kimde |
 |---|---|
 | **DNS kaydı** — `A  scanner  72.62.146.159` (dijimagic.com bölgesi, Turhost) | Owner |
-| Story77 **MERSİS numarası + tam ticaret unvanı** (e-posta altbilgisi, md.8/2) | Owner |
+| Story77 **MERSİS + ticaret unvanı** — Owner "eklemeyeceğiz" dedi, karar teyidi bekliyor (md.8/2 zorunlu; 2026 cezası ihlal başına 2.859–14.309 TL, toplu gönderimde on katına kadar) | Owner |
 | Apify kredisi (5 USD'nin 4,47'si kullanıldı, **23 Eylül**'de yenilenir) | Owner kararı |
 | Facebook katmanının kurulması | onay bekliyor |
 
