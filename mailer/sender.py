@@ -63,8 +63,8 @@ uygun bir zamanda iletişime geçebilir misiniz?</p>
         import json as _json
         from urllib.parse import quote
 
-        from_name = FROM_NAME or "YO Dijital"
-        from_email = FROM_EMAIL or "info@yodijital.com"
+        from_name = FROM_NAME or "DijiMagic"
+        from_email = FROM_EMAIL or "info@dijimagic.com"
 
         # Abonelikten cikanlar listesi (Supabase)
         unsubscribed = set()
@@ -85,7 +85,7 @@ uygun bir zamanda iletişime geçebilir misiniz?</p>
                 logger.warning(f"  Supabase baglanti hatasi: {e}")
 
         # Base URL
-        base_url = os.getenv("APP_BASE_URL", "https://yodijital.com")
+        base_url = os.getenv("APP_BASE_URL", "https://dijimagic.com")
 
         result = {"sent": 0, "failed": 0, "skipped": 0, "errors": []}
 

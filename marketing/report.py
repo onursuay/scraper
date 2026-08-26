@@ -236,11 +236,11 @@ def _render_report_html(data: dict) -> str:
     <table width="100%" cellpadding="0" cellspacing="0">
       <tr>
         <td>
-          <strong style="color:#1e293b;font-size:14px;">YO Dijital — Yo Scraper</strong><br>
+          <strong style="color:#1e293b;font-size:14px;">DijiMagic — DijiScraper</strong><br>
           <span style="color:#94a3b8;font-size:12px;">Bu rapor her gün saat 20:00'da otomatik gönderilir.</span>
         </td>
         <td align="right">
-          <a href="https://scraper.yodijital.com/marketing" style="color:#2563eb;text-decoration:none;font-size:13px;font-weight:600;">Panele Git →</a>
+          <a href="https://scanner.onursuay.com/marketing" style="color:#2563eb;text-decoration:none;font-size:13px;font-weight:600;">Panele Git →</a>
         </td>
       </tr>
     </table>
@@ -270,8 +270,8 @@ def send_daily_report():
     try:
         data = build_daily_report()
         html = _render_report_html(data)
-        from_name  = os.getenv("FROM_NAME", "YO Dijital")
-        from_email = os.getenv("FROM_EMAIL", "info@yodijital.com")
+        from_name  = os.getenv("FROM_NAME", "DijiMagic")
+        from_email = os.getenv("FROM_EMAIL", "info@dijimagic.com")
 
         resend.Emails.send({
             "from":    f"{from_name} <{from_email}>",

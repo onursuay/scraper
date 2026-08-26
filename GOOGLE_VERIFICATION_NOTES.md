@@ -82,7 +82,7 @@ Google's verification team requested the following corrections before approving 
 1. Go to **APIs & Services → Credentials**.
 2. Click **+ Create Credentials → API Key**.
 3. Restrict the key: **API restrictions → Restrict key → Google Picker API**.
-4. Restrict by **HTTP referrers**: add `scraper.yodijital.com/*` (and `localhost:*` for dev).
+4. Restrict by **HTTP referrers**: add `scanner.onursuay.com/*` (and `localhost:*` for dev).
 5. Copy the key and set it as `GOOGLE_API_KEY` in your Railway environment variables.
 
 ### Step 4 — Get Your Project Number
@@ -97,7 +97,7 @@ After completing the above, reply to the Google verification email with somethin
 > 1. Added `drive.file` scope to the OAuth consent screen.
 > 2. Removed `drive.metadata.readonly` from the consent screen.
 > 3. Replaced the Drive file listing with Google Picker API, so users explicitly select files — no broad Drive access occurs.
-> 4. Updated our Privacy Policy at https://scraper.yodijital.com/privacy-policy to include explicit coverage of token lifecycle, TLS transit encryption, no refresh token storage, minimum scope usage, Limited Use disclosure, and data deletion procedures.
+> 4. Updated our Privacy Policy at https://scanner.onursuay.com/privacy-policy to include explicit coverage of token lifecycle, TLS transit encryption, no refresh token storage, minimum scope usage, Limited Use disclosure, and data deletion procedures.
 >
 > Please re-review the submission.
 

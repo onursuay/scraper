@@ -192,9 +192,9 @@ def api_test_send():
     rendered_body    = _render(body_html, sample_lead)
 
     api_key    = os.getenv("RESEND_API_KEY", "")
-    from_name  = os.getenv("FROM_NAME", "YO Dijital")
-    from_email = os.getenv("FROM_EMAIL", "info@yodijital.com")
-    base_url   = os.getenv("APP_BASE_URL", "https://scraper.yodijital.com")
+    from_name  = os.getenv("FROM_NAME", "DijiMagic")
+    from_email = os.getenv("FROM_EMAIL", "info@dijimagic.com")
+    base_url   = os.getenv("APP_BASE_URL", "https://scanner.onursuay.com")
 
     if not api_key:
         return jsonify({"error": "RESEND_API_KEY tanımlı değil — test gönderilemez."}), 500

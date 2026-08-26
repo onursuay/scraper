@@ -1,5 +1,5 @@
 /**
- * Yo Scraper App i18n Engine
+ * DijiScraper App i18n Engine
  * Language stored in localStorage key: 'lp_lang' (shared with landing page)
  * Usage:
  *   - HTML:  <span data-i18n="key">Türkçe metin</span>
@@ -22,7 +22,7 @@
 
             // ── LOGIN ──
             'login-title':    'Sign In',
-            'login-subtitle': 'Sign in to your Yo Scraper account',
+            'login-subtitle': 'Sign in to your DijiScraper account',
             'email-label':    'Email',
             'email-ph':       'example@company.com',
             'pw-label':       'Password',
@@ -33,7 +33,7 @@
 
             // ── REGISTER ──
             'reg-title':       'Register',
-            'reg-subtitle':    'Create your free Yo Scraper account',
+            'reg-subtitle':    'Create your free DijiScraper account',
             'fullname-label':  'Full Name',
             'fullname-ph':     'John Doe',
             'company-label':   'Company',

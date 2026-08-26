@@ -135,8 +135,8 @@ CONTACT_PAGES = [
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "")
 
 # E-posta ayarlari (Resend API)
-FROM_NAME = os.getenv("FROM_NAME", "YO Dijital")
-FROM_EMAIL = os.getenv("FROM_EMAIL", "info@yodijital.com")
+FROM_NAME = os.getenv("FROM_NAME", "DijiMagic")
+FROM_EMAIL = os.getenv("FROM_EMAIL", "info@dijimagic.com")
 EMAIL_SUBJECT = os.getenv("EMAIL_SUBJECT", "Is Birligi Teklifi")
 EMAIL_TEMPLATE_FILE = os.getenv("EMAIL_TEMPLATE_FILE", "email_template.html")
 EMAIL_SEND_DELAY = 2  # saniye

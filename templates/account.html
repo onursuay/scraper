@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/static/logo.png">
-    <title>Yo Scraper</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+    <title>DijiScraper</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -14,7 +16,7 @@
 {% set first_name = name_parts[0] %}
 {% set last_name  = name_parts[1] if name_parts|length > 1 else '' %}
 {% set referral_code = user.id[:8].upper() %}
-{% set referral_link = 'https://scraper.yodijital.com/?ref=' + referral_code %}
+{% set referral_link = 'https://scanner.onursuay.com/?ref=' + referral_code %}
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }

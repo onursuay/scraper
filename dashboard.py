@@ -552,7 +552,7 @@ def robots_txt():
         "Allow: /\n"
         "Allow: /en/privacy-policy\n"
         "Allow: /en/terms-of-service\n\n"
-        "Sitemap: https://scraper.yodijital.com/sitemap.xml\n"
+        "Sitemap: https://scanner.onursuay.com/sitemap.xml\n"
     )
     return content, 200, {"Content-Type": "text/plain; charset=utf-8"}
 
@@ -562,17 +562,17 @@ def sitemap_xml():
     content = '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://scraper.yodijital.com/</loc>
+    <loc>https://scanner.onursuay.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://scraper.yodijital.com/en/privacy-policy</loc>
+    <loc>https://scanner.onursuay.com/en/privacy-policy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://scraper.yodijital.com/en/terms-of-service</loc>
+    <loc>https://scanner.onursuay.com/en/terms-of-service</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -878,10 +878,10 @@ def api_sendmail_send():
     if not api_key:
         return jsonify({"error": "RESEND_API_KEY ayarlanmamış. .env dosyasını kontrol edin."}), 400
 
-    from_name = os.getenv("FROM_NAME", "YO Dijital")
-    from_email = os.getenv("FROM_EMAIL", "info@yodijital.com")
+    from_name = os.getenv("FROM_NAME", "DijiMagic")
+    from_email = os.getenv("FROM_EMAIL", "info@dijimagic.com")
 
-    base_url = os.getenv("APP_BASE_URL", "https://scraper.yodijital.com")
+    base_url = os.getenv("APP_BASE_URL", "https://scanner.onursuay.com")
 
     def send_thread():
         global _mail_sending

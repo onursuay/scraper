@@ -46,9 +46,9 @@ def enqueue(
 def process_queue():
     """Bekleyen queue öğelerini Resend'e gönder. APScheduler tarafından dakikada çağrılır."""
     api_key   = os.getenv("RESEND_API_KEY", "")
-    from_name = os.getenv("FROM_NAME", "YO Dijital")
-    from_email = os.getenv("FROM_EMAIL", "info@yodijital.com")
-    base_url  = os.getenv("APP_BASE_URL", "https://scraper.yodijital.com")
+    from_name = os.getenv("FROM_NAME", "DijiMagic")
+    from_email = os.getenv("FROM_EMAIL", "info@dijimagic.com")
+    base_url  = os.getenv("APP_BASE_URL", "https://scanner.onursuay.com")
 
     if not api_key:
         return
@@ -150,7 +150,7 @@ def _email_footer(unsub_url: str) -> str:
         f'<p>Bu e-postayı almak istemiyorsanız '
         f'<a href="{unsub_url}" style="color:#3b82f6;">abonelikten çıkabilirsiniz</a>'
         f' / <a href="{unsub_url}" style="color:#3b82f6;">unsubscribe</a>.</p>'
-        '<p style="margin-top:8px;">YO Dijital &bull; yodijital.com</p>'
+        '<p style="margin-top:8px;">DijiMagic &bull; dijimagic.com</p>'
         '</div>'
     )
 

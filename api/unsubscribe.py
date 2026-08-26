@@ -57,7 +57,7 @@ p{{color:#64748b;font-size:15px;line-height:1.7;margin-bottom:8px}}
 <h1>Abonelikten \u00c7\u0131k\u0131ld\u0131</h1>
 <p><span class="email">{email}</span> adresi e-posta listemizden \u00e7\u0131kar\u0131ld\u0131.</p>
 <p>Art\u0131k size pazarlama e-postas\u0131 g\u00f6ndermeyece\u011fiz.</p>
-<p class="note">Bu i\u015flem yanl\u0131\u015fl\u0131kla yap\u0131ld\u0131ysa info@yodijital.com adresine yaz\u0131n.</p>
+<p class="note">Bu i\u015flem yanl\u0131\u015fl\u0131kla yap\u0131ld\u0131ysa info@dijimagic.com adresine yaz\u0131n.</p>
 </div>
 </body>
 </html>"""
