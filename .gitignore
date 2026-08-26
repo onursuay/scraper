@@ -1,5 +1,8 @@
 credentials/
 .env
+# API anahtarı içeren .env yedekleri (asla depoya girmez)
+.env.yedek*
+.env.*.yedek
 __pycache__/
 *.pyc
 .venv/
