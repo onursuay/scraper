@@ -1,4 +1,19 @@
-# Google Map Scanner — Durum (26.08.2026)
+# Google Map Scanner — Durum (güncel: 24.11.2026)
+
+## 🆕 24.11.2026 — Keşif Places API'ye döndü, gönderim DURDURULDU
+
+Ayrıntı ve rakamlar: [kesif/README.md](kesif/README.md). Özet:
+
+- **Keşif:** Google Places API (New) Text Search, ücretsiz kota içinde (ayda 1.000 istek; defter tavanı 990,
+  Kasım'da 137 kullanıldı). Apify bu iş için kullanılmıyor; aşağıdaki Apify anlatımı 26.08 tarihçesidir.
+- **Çıktı:** Iron Mountain tablosu → **Scanner** sekmesi (telefon, il ve ilçe firmanın kendi sitesinden)
+  → DijiMagic Email Marketing kişileri (304 kişi) → ısınma rampalı kuyruk (25'ten 100'e, hafta içi 10:00-16:00).
+- 🔴 **Gönderim durdu** (Owner 24.11: "mail gönderimini durdur, metinler değişmeli"). 24 mail gitti; bekleyen
+  296 kuyruk satırı 2099'a ertelendi, asıl saatler `kesif/_gonderim_durdurma_yedegi_2026-11-24.json` dosyasında.
+  Yeni metinler onaylanmadan gönderim açılmaz.
+- **Onarılan:** bozuk kodlanmış 11 firma adı (Ä°nce → İnce) aday dosyası, Scanner sekmesi ve DijiMagic
+  kişilerinde düzeltildi, kalan 0. DijiMagic Kişiler tablosunda başlık ve hücreler artık tek satırda.
+- **1 Aralık:** `SearchTextRequest` günlük kotası yeniden 32'ye alınır.
 
 ## Panel adresi
 
@@ -150,10 +165,12 @@ veriden çıktı. Kredi yenilenince gerçek koşu yapılacak.
 
 | Konu | Kimde |
 |---|---|
+| **Yeni mail metinleri** — onaylanınca kuyruk geri açılır (24.11) | Owner |
+| Places taraması her gün TR 11:00 sonrası, 30.11'e kadar | Claude |
+| `site_telefon` yanlış numara seçimi (dentoran 0244, drtolgakodaz 0214) | Claude |
 | **İlk hesabın açılması** — panelde "Kayıt Ol" | Owner |
 | Story77 **MERSİS + ticaret unvanı** — Owner "eklemeyeceğiz" dedi, karar teyidi bekliyor (md.8/2 zorunlu; 2026 cezası ihlal başına 2.859–14.309 TL, toplu gönderimde on katına kadar) | Owner |
-| Apify kredisi — 5 USD'nin 4,86'sı kullanıldı, **23 Eylül**'de yenilenir | Owner kararı |
-| Facebook katmanının gerçek koşusu | kredi bekliyor |
+| ~~Apify kredisi / Facebook katmanının gerçek koşusu~~ | ⛔ geçersiz (24.11: keşif Places API'de) |
 
 ## Hukuki çerçeve (özet)
 
