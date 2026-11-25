@@ -61,3 +61,20 @@ python3 kesif/tara_places.py                 # keşif (günlük kota bitince ken
 python3 kesif/aktar_dijimagic.py --kuru      # planı göster, hiçbir yere yazma
 python3 kesif/aktar_dijimagic.py             # tabloya yaz + DijiMagic'e aktar + kuyruğa planla
 ```
+
+## İlan veren firmalar (25.11.2026, Owner fikri)
+
+Owner iş ilanı sitelerinden (Kariyer.net, İşin Olsun vb.) **elle** firma adı + pozisyon grubu toplar;
+`ilan_firmalari.py` adı firmanın kendi sitesine ve kurumsal genel e-postaya çevirip **yalnız Scanner tablosuna** yazar.
+Sektör sütunu `İlan: <Grup>` (Sosyal Medya / Web / Reklam). DijiMagic'e **aktarmaz, kuyruğa almaz**: seri ve metin Owner kararıdır.
+İlan sitelerinden otomatik veri çekilmez (Kariyer.net bot korumalı, LinkedIn/Armut kullanım koşulları yasak).
+
+```bash
+# ilan_firmalari_girdi.txt: her satır  Firma adı ; Grup ; Şehir(isteğe bağlı)
+python3 kesif/ilan_firmalari.py kesif/ilan_firmalari_girdi.txt --kuru   # tabloya yazmaz
+python3 kesif/ilan_firmalari.py kesif/ilan_firmalari_girdi.txt          # Scanner'a yazar + geri okur
+```
+
+Güvenlikler: Places'ta bulunan firma adı girdiyle ≥%60 örtüşmezse yanlış firma sayılır (yazılmaz); her firma 1 Places isteği
+(aylık sayaç tara_places ile ortak); tekrar denetimi tablo + DijiMagic kişileri + alan adı. Rapor durumları: EKLENDİ, ZATEN VAR, SİTE YOK, E-POSTA YOK.
+Python 3.9 için `psycopg2-binary` kullanıcı düzeyinde kuruldu (25.11).
