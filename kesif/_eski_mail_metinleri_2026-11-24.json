@@ -1,0 +1,58 @@
+[
+ {
+  "id": "34537ce6-d7b1-44dc-b88b-d10890cf9ed4",
+  "automation_id": "0465feb3-4696-4e61-977d-3354e0fb1872",
+  "step_order": 0,
+  "subject": "Reklamlarınızı Sizin Yerinize Oluşturup Düzenli Takip Eden Bir Sisteme Ne Dersiniz?",
+  "html": "<p>Merhaba,</p>\n<p>DijiMagic, Meta (Facebook ve Instagram), Google ve TikTok reklam hesaplarınıza bağlanarak reklamlarınızı tek panelden kurmanızı ve yönetmenizi sağlayan bir yazılımdır.</p>\n<p>DijiMagic, sitenizi ve sosyal medya hesaplarınızı inceleyerek işletmenize özel reklam stratejisini kurar. Size müşteri kazandırabilecek kitleleri bulur ve mevcut müşterilerinize benzeyen kişilere ulaşmanızı sağlar. Böylece ayrı bir ekip kurmadan ve ajans ücreti ödemeden reklamlarınızı tek panelden yönetebilirsiniz.</p>\n<p>{{ilce}} bölgesindeki {{firma}} için 15 dakikalık ücretsiz bir danışmanlık görüşmesi önermek istiyoruz. Görüşmede {{hizmet}} alanındaki mevcut reklam ve sosyal medya çalışmanızı birlikte değerlendiririz.</p>\n<p>Size uygun bir gün ve saat için bu e-postayı yanıtlamanız yeterli.</p>\n<p>Saygılarımızla<br>DijiMagic<br><a href=\"https://dijimagic.com\">dijimagic.com</a></p>",
+  "delay_days": 0
+ },
+ {
+  "id": "12f2cc20-807c-407a-801f-961a2aaa1406",
+  "automation_id": "0465feb3-4696-4e61-977d-3354e0fb1872",
+  "step_order": 1,
+  "subject": "Reklam Performansınızı Ölçüp Size Öneriler Sunan Bir Sistem İster misiniz?",
+  "html": "<p>Merhaba,</p>\n<p>Reklam yayına girdikten sonra asıl soru, hangi kampanyanın gerçekten müşteri getirdiğidir. DijiMagic bu soruyu dört modülle yanıtlar.</p>\n<p>Dönüşüm Sihirbazı sitenizi tarar ve izlenmesi gereken aksiyonları belirler. Meta Pixel, Google Tag Manager, Google Analytics, Google Ads ve Search Console kurulumunu tek akışta yapar.</p>\n<p>Optimizasyon modülü Meta, Google ve TikTok kampanyalarınızı inceler ve iyileştirme önerileri sunar. Onayladığınız öneri panelden uygulanır, gerekirse geri alınır.</p>\n<p>DijiAlgoritma, işletmenizi tanıyan ve sorularınızı yanıtlayan bir modüldür. Büyüme önerileri sunar ve siz onaylamadan reklam hesabınızda hiçbir değişiklik yapmaz.</p>\n<p>Raporlar modülü Meta Ads, Google Ads, Google Analytics ve Search Console verilerinizi tek panelde toplar.</p>\n<p>{{ilce}} bölgesindeki {{firma}} için 15 dakikalık ücretsiz danışmanlık görüşmesi önerimiz hâlâ geçerli. Görüşmede {{hizmet}} alanındaki reklam çalışmanızın nasıl ölçüldüğünü birlikte inceleriz.</p>\n<p>Size uygun bir gün ve saat için bu e-postayı yanıtlamanız yeterli.</p>\n<p>Saygılarımızla<br>DijiMagic<br><a href=\"https://dijimagic.com\">dijimagic.com</a></p>",
+  "delay_days": 7
+ },
+ {
+  "id": "1ba92911-8104-47db-bbed-ada3d6591740",
+  "automation_id": "0465feb3-4696-4e61-977d-3354e0fb1872",
+  "step_order": 4,
+  "subject": "Firmanızın Yapay Zekâ Aramalarında Çıkmasını İstemez misiniz?",
+  "html": "<p>Merhaba,</p>\n<p>SEO/GEO modülü, sitenizin adresini girdiğinizde meta etiketlerini, başlık yapısını, görselleri, bağlantıları ve teknik SEO durumunu analiz eder. Markanızı bilmeyen bir müşterinin soracağı sorular ChatGPT ve Claude'a yöneltilir ve sitenizin bu yanıtlarda anılıp anılmadığı ölçülür. Modül, belirlediğiniz günlerde makale üretir. WordPress sitenizi bağlarsanız makaleler otomatik yayınlanır ya da taslak olarak bekler.</p>\n<p>Web Site Yöneticisi modülü, işletme profilinizdeki bilgilerle markanıza uygun bir web sitesi tasarlar. Siteyi önizleyip onaylarsınız. Değiştirmek istediğiniz bölüme tıklayarak ya da isteğinizi yazarak düzenleyebilir, ardından tek tuşla yayına alabilirsiniz. Sitenizin iletişim formundan gelen mesajlar panelde saklanır.</p>\n<p>{{ilce}} bölgesindeki {{firma}} için 15 dakikalık ücretsiz danışmanlık görüşmesi önerimiz hâlâ geçerli. Görüşmede {{hizmet}} alanında sitenizin aramalardaki durumunu birlikte inceleriz.</p>\n<p>Size uygun bir gün ve saat için bu e-postayı yanıtlamanız yeterli.</p>\n<p>Saygılarımızla<br>DijiMagic<br><a href=\"https://dijimagic.com\">dijimagic.com</a></p>",
+  "delay_days": 7
+ },
+ {
+  "id": "c17f4776-e0df-4fba-be4e-507a546cc530",
+  "automation_id": "0465feb3-4696-4e61-977d-3354e0fb1872",
+  "step_order": 2,
+  "subject": "Tek Tıkla Görsel veya Video Üretip Sosyal Medya Hesaplarınızda Paylaşan Sisteme Hayır Diyebilir misiniz?",
+  "html": "<p>Merhaba,</p>\n<p>Tasarım modülü, yazdığınız kısa açıklamaya göre görsel ve video üretir. Görselleri Meta akış, hikâye, Reels ve Google reklamlarına uygun ölçülerde hazırlayabilirsiniz. Bir fotoğraf yüklediğinizde, işletme profilinizdeki logo, telefon ve renk bilgileriyle animasyonlu bir kampanya videosu oluşturulur. Hazırlanan tasarımı Facebook ve Instagram hesaplarınızda doğrudan paylaşabilirsiniz.</p>\n<p>Ürün Stüdyosu modülü, ürün fotoğrafınızı seçtiğiniz stilde bir reklam videosuna dönüştürür ve ürünün arka planını kaldırır. Ürünlerinizden paylaşılabilir bir vitrin kataloğu oluşturup bağlantısını müşterilerinize gönderebilirsiniz. Katalogdan gelen talepler panelinizde toplanır.</p>\n<p>{{ilce}} bölgesindeki {{firma}} için 15 dakikalık ücretsiz danışmanlık görüşmesi önerimiz hâlâ geçerli. Görüşmede {{hizmet}} alanında kullandığınız görselleri birlikte inceleriz.</p>\n<p>Size uygun bir gün ve saat için bu e-postayı yanıtlamanız yeterli.</p>\n<p>Saygılarımızla<br>DijiMagic<br><a href=\"https://dijimagic.com\">dijimagic.com</a></p>",
+  "delay_days": 7
+ },
+ {
+  "id": "8ccdb691-2871-4766-a5f4-773fbe4732aa",
+  "automation_id": "0465feb3-4696-4e61-977d-3354e0fb1872",
+  "step_order": 3,
+  "subject": "Sosyal Medya İçeriklerinizi Hem Üreten Hem de Zamanında Paylaşan Bir Sistem İster misiniz?",
+  "html": "<p>Merhaba,</p>\n<p>DijiMagic'in Sosyal Medya modülünde içerik üretimi ve paylaşımı aynı ekrandan yapılır. Kısa bir açıklama yazdığınızda DijiMagic, işletme profilinizdeki tona ve renklere uygun bir görsel ya da video üretir. Bir fotoğraf yüklerseniz logonuz, telefonunuz ve marka renklerinizle animasyonlu bir video hazırlanır. Sonucu beğenmezseniz neyin değişmesini istediğinizi yazarak düzeltebilirsiniz.</p>\n<p>Hazırlanan içeriğe tarih ve saat verirsiniz, DijiMagic zamanı gelince Instagram ve Facebook'ta kendisi paylaşır. Akış gönderisi, carousel, Reels ve hikâye paylaşabilirsiniz. Aynı içeriği birden fazla hesaba da gönderebilirsiniz.</p>\n<p>Performans bölümü yayınlarınızın beğeni, yorum ve etkileşim sayılarını gösterir. Yeterli paylaşım olduğunda en çok etkileşim alan saati size önerir.</p>\n<p>{{ilce}} bölgesindeki {{firma}} için 15 dakikalık ücretsiz danışmanlık görüşmesi önerimiz hâlâ geçerli. Görüşmede {{hizmet}} alanındaki sosyal medya paylaşımlarınızı birlikte değerlendiririz.</p>\n<p>Size uygun bir gün ve saat için bu e-postayı yanıtlamanız yeterli.</p>\n<p>Saygılarımızla<br>DijiMagic<br><a href=\"https://dijimagic.com\">dijimagic.com</a></p>",
+  "delay_days": 7
+ },
+ {
+  "id": "b0770f14-2fec-4d32-a517-203c81f7b1fc",
+  "automation_id": "0465feb3-4696-4e61-977d-3354e0fb1872",
+  "step_order": 5,
+  "subject": "Reklamdan Gelen Müşteri Adaylarınızı Tek Panelde Takip Etmek İster misiniz?",
+  "html": "<p>Merhaba,</p>\n<p>CRM Sistemi modülü, Facebook sayfanızı bağladığınızda Meta form reklamlarından gelen müşteri adaylarını tek panelde toplar. Adayları aşamalarına göre işaretleyebilir, listeyi CSV ya da Google E-Tablo olarak dışa aktarabilirsiniz. İşaretlediğiniz adaylar Meta'daki özel hedef kitlelere aktarılabilir. Böylece benzer kişilere ulaşabilir ya da uygun olmayan kişileri hedeflemenin dışında bırakabilirsiniz.</p>\n<p>Email Marketing modülü, CRM'deki adaylarınızı ya da yüklediğiniz Excel ve CSV listelerini kişi listenize ekler. Kampanya e-postalarını kendi alan adınızdaki adresten ya da Gmail hesabınızdan gönderebilir, açılma ve tıklamaları panelden izleyebilirsiniz. Otomasyon bölümünde, yeni bir kişi eklendiğinde ya da bir aday belirli bir aşamaya geçtiğinde başlayan çok adımlı e-posta serileri kurabilirsiniz.</p>\n<p>Bu e-posta, DijiMagic'i tanıttığımız serinin son e-postasıdır. {{ilce}} bölgesindeki {{firma}} için 15 dakikalık ücretsiz danışmanlık görüşmesi önerimiz geçerliliğini koruyor. Görüşmede {{hizmet}} alanında müşteri adaylarınızı nasıl takip ettiğinizi birlikte değerlendiririz.</p>\n<p>Size uygun bir gün ve saat için bu e-postayı yanıtlamanız yeterli.</p>\n<p>Saygılarımızla<br>DijiMagic<br><a href=\"https://dijimagic.com\">dijimagic.com</a></p>",
+  "delay_days": 7
+ },
+ {
+  "id": "44c4f8e9-efd3-46d2-a4ca-e56436bb68b8",
+  "automation_id": "505297b3-cd4e-4915-a657-71a17b89a500",
+  "step_order": 0,
+  "subject": "Kliniğinizin Yapay Zekâ Aramalarında Çıkmasını İstemez misiniz?",
+  "html": "<p>Merhaba,</p>\n<p>DijiMagic'in Web Site Yöneticisi ve SEO/GEO modülleri, kurumunuzun web sitesini ve aramalardaki görünürlüğünü tek panelden yönetmenizi sağlar.</p>\n<p>SEO/GEO modülü, sitenizin adresini girdiğinizde meta etiketlerini, başlık yapısını, görselleri, bağlantıları ve teknik SEO durumunu analiz eder. Kurumunuzu bilmeyen birinin soracağı sorular ChatGPT ve Claude'a yöneltilir ve sitenizin bu yanıtlarda anılıp anılmadığı ölçülür. Modül, belirlediğiniz günlerde makale üretir. WordPress sitenizi bağlarsanız makaleler otomatik yayınlanır ya da taslak olarak bekler.</p>\n<p>Web Site Yöneticisi modülü, kurum bilgilerinizle size uygun bir web sitesi tasarlar. Siteyi önizleyip onaylarsınız. Değiştirmek istediğiniz bölüme tıklayarak ya da isteğinizi yazarak düzenleyebilir, ardından tek tuşla yayına alabilirsiniz. Sitenizin iletişim formundan gelen mesajlar panelde saklanır.</p>\n<p>{{ilce}} bölgesindeki {{firma}} için 15 dakikalık ücretsiz bir danışmanlık görüşmesi önermek istiyoruz. Görüşmede sitenizin Google ve yapay zekâ aramalarındaki durumunu birlikte inceleriz.</p>\n<p>Size uygun bir gün ve saat için bu e-postayı yanıtlamanız yeterli.</p>\n<p>Saygılarımızla<br>DijiMagic<br><a href=\"https://dijimagic.com\">dijimagic.com</a></p>",
+  "delay_days": 0
+ }
+]
