@@ -1,4 +1,11 @@
-# Google Map Scanner — Durum (güncel: 24.11.2026)
+# Google Map Scanner — Durum (güncel: 25.11.2026)
+
+## 🆕 25.11.2026 — Gönderim yeniden AÇIK
+
+Yeni metinlerle iki otomasyon açıldı; kuyrukta 286 mail (son 09.12), zamanı geçmiş bekleyen 0. Gönderim
+zamanlayıcısı 10 dakikada bir. İlan veren firmalar için `kesif/ilan_firmalari.py` (Owner adları elle verir,
+yalnız Scanner'a yazılır). Ayrıntı: [kesif/README.md](kesif/README.md). Aşağıdaki 24.11 bölümü tarihçedir.
+
 
 ## 🆕 24.11.2026 — Keşif Places API'ye döndü, gönderim DURDURULDU
 

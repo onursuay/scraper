@@ -27,32 +27,29 @@ dosyalar tarihçe olarak duruyor.
   Takip mailleri öngörülerek yük haritasına eklenir; yeni ilk mail yalnız o günün boş kapasitesine konur.
 - **Otomasyonlar kapalıyken** yeni kişi tabloya yazılır ama **kuyruğa alınmaz**.
 
-## Güncel durum (24.11.2026 akşamı)
+## Güncel durum (25.11.2026 16:30, veritabanından geri okundu)
 
 | Kalem | Değer |
 |---|---|
-| Kasım ayı Places isteği | 137 / 990 |
-| Görülen place | 1.686 · biten sorgu 47 |
-| Aday kaydı | 364 (kurumsal 188 · inceleme 7 · eski biçim 169) |
-| DijiMagic'e aktarılan | 262 · kişi listesi 304 |
-| Gönderilen | kuyruktan 24 (son 24.11 10:00) |
-| **Gönderim** | 🔴 **DURDURULDU** (Owner 24.11: "mail gönderimini durdur, metinler değişmeli") |
+| Kasım ayı Places isteği | 140 / 990 |
+| DijiMagic kişi listesi | 305 |
+| **Gönderim** | ✅ **AÇIK** (25.11 yeni metinlerle yeniden başladı; iki otomasyon açık) |
+| Kuyruk | 286 bekleyen (son 09.12) · 34 gönderildi · zamanı geçmiş bekleyen 0 |
+| Takip | açılma 3 · tıklama 0 · geri dönen 4 |
 
-**Durdurma nasıl yapıldı:** iki otomasyon (`DijiMagic Tanıtım Serisi`, `DijiMagic Sağlık Kuruluşları`)
-`enabled = false`; ancak drip cron `enabled` alanına bakmadığı için bekleyen **296** kuyruk satırının
-`scheduled_at` değeri `2099-01-01`e alındı. Asıl saatler `_gonderim_durdurma_yedegi_2026-11-24.json`
-dosyasında (kuyruk kimliği → eski saat). Yeniden başlatma: yeni metinler onaylanır → otomasyon adımları
-güncellenir → kuyruk yedekten geri yazılır ya da yeniden planlanır → iki otomasyon açılır → geri okunur.
-
-**Bozuk ad onarımı (24.11):** `onar` eklenmeden önceki taramadan kalan 11 bozuk ad aday dosyasında,
-6'sı DijiMagic kişilerinde, 5'i Scanner sekmesinde düzeltildi; üçünde de geri okumada kalan 0.
+- Gönderim zamanlayıcısı **10 dakikada bir** çalışır (25.11'e kadar saatlikti); mail planlı saatten en çok 10 dk sonra gider.
+- DijiMagic kişi listesi Mail Tarihi'ne göre **takvim sırasıyla** (eskiden yeniye) sıralanır.
+- Telefon her kaynakta "0532 000 00 00" biçimine çevrilir (DijiMagic tarafında; `aktar_dijimagic.py` hâlâ ham yazar, veri şu an uyumlu).
+- Elle/CSV/CRM eklenen kişi otomatik seriye girmez (Owner kararı); seriye almak DijiMagic'te "Seriye al" ile.
+- Mailde tek bağlantı (dijimagic.com) + abonelikten çık; ek bağlantı eklenmez, açılma takibi açık (Owner 25.11: "şu haliyle kalsın").
+- 24.11 durdurma yedeği (`_gonderim_durdurma_yedegi_2026-11-24.json`) tarihçedir, kuyruk 25.11'de yeniden planlandı.
 
 ## Açık işler
 
 - Places taraması her gün TR 11:00'den sonra 30.11'e kadar, ardından `aktar_dijimagic.py`.
 - **1 Aralık:** Cloud konsolunda `SearchTextRequest` günlük kotası yeniden **32**'ye alınır.
 - `site_telefon` bazı sitelerde yanlış numara seçiyor (dentoran → 0244, drtolgakodaz → 0214).
-- Mail metinleri değişmeden gönderim açılmaz.
+- İlan veren firma listesi Owner'dan bekleniyor (`ilan_firmalari.py`).
 
 ## Kullanım
 
